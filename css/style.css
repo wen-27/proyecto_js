@@ -1,986 +1,1269 @@
 /* ========= 🔹 ESTILOS GENERALES (para nav y secciones) ========= */
 
+/* Estilos básicos del cuerpo de la página */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif; /* Fuente principal */
+  margin: 0; /* Sin márgenes */
+  padding: 0; /* Sin relleno */
 }
 
-/* Nav */
+/* Barra de navegación fija en la parte superior */
 nav {
-  background: #f5f5f5;
-  padding: 10px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  z-index: 1000;
+  background: #f5f5f5; /* Fondo gris claro */
+  padding: 12px 40px; /* Relleno interno */
+  position: fixed; /* Posición fija */
+  top: 0; /* Arriba */
+  left: 0; /* Izquierda */
+  width: 100%; /* Ancho completo */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra sutil */
+  z-index: 1000; /* Z-index alto para estar encima */
+  flex-wrap: wrap;
+  display: flex; /* Flexbox para alinear elementos */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: space-between; /* Espacio entre izquierda y derecha */
 }
 
-nav a {
-  margin: 0 15px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
+/* Parte izquierda del nav: ícono y título */
+.nav-left {
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  gap: 8px; /* Espacio entre ícono y texto */
+  font-size: 1.2rem; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+  color: #333; /* Color gris oscuro */
 }
 
-nav a:hover {
-  color: #0077cc;
+/* Parte derecha del nav: enlaces */
+.nav-right {
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  gap: 25px; /* Espacio entre enlaces */
 }
 
-/* Secciones */
+/* Estilos para los enlaces del nav */
+.nav-right a {
+  text-decoration: none; /* Sin subrayado */
+  color: #333; /* Color gris oscuro */
+  font-weight: 500; /* Peso medio */
+  transition: color 0.3s; /* Transición suave en color */
+  flex-wrap: wrap;
+}
+
+/* Hover para enlaces del nav */
+.nav-right a:hover {
+  color: #f97316; /* Color naranja en hover */
+}
+
+/* Estilos para las secciones principales */
 section {
-  display: none;
-  padding: 80px 30px 30px; /* 80px arriba para que no se tape con el nav */
+  display: none; /* Ocultas por defecto */
+  padding: 80px 30px 30px; /* Relleno: 80px arriba para evitar nav, 30px laterales e inferior */
 }
 
+/* Sección activa visible */
 section.active {
-  display: block;
+  display: block; /* Mostrar bloque */
 }
 
 /* ========= 🔹 ESTILOS LOGIN ========= */
 
+/* Reset de márgenes y rellenos para todos los elementos */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Sin márgenes */
+  padding: 0; /* Sin rellenos */
+  box-sizing: border-box; /* Modelo de caja border-box */
 }
 
+/* Estilos del cuerpo para la página de login */
 body.login-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+  min-height: 100vh; /* Altura mínima de viewport */
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%); /* Gradiente de fondo */
+  display: flex; /* Flexbox para centrar */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  padding: 20px; /* Relleno */
+  position: relative; /* Posición relativa */
+  overflow: hidden; /* Ocultar desbordamiento */
+}
+
+/* Decoraciones de fondo animadas */
+.bg-decoration {
+  position: absolute; /* Posición absoluta */
+  border-radius: 50%; /* Circular */
+  filter: blur(60px); /* Desenfoque */
+  opacity: 0.3; /* Opacidad baja */
+  animation: float 6s ease-in-out infinite; /* Animación flotante */
+}
+
+/* Primera decoración */
+.decoration-1 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #fbbf24; /* Color amarillo */
+  top: 10%; /* Posición arriba */
+  left: 5%; /* Posición izquierda */
+}
+
+/* Segunda decoración */
+.decoration-2 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #fb923c; /* Color naranja */
+  top: 20%; /* Posición arriba */
+  right: 5%; /* Posición derecha */
+  animation-delay: 1s; /* Retraso en animación */
+}
+
+/* Tercera decoración */
+.decoration-3 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #f97316; /* Color naranja oscuro */
+  bottom: 10%; /* Posición abajo */
+  left: 30%; /* Posición izquierda */
+  animation-delay: 2s; /* Retraso en animación */
+}
+
+/* Animación de flotación para decoraciones */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); } /* Posición inicial y final */
+  50% { transform: translateY(-20px); } /* Mitad de la animación */
+}
+
+/* Contenedor principal del formulario */
+.container {
+  width: 100%; /* Ancho completo */
+  max-width: 480px; /* Ancho máximo */
+  margin: auto; /* Centrar horizontalmente */
+  position: relative; /* Posición relativa */
+  z-index: 10; /* Z-index alto */
+}
+
+/* Encabezado del formulario */
+.header {
+  text-align: center; /* Centrar texto */
+  margin-bottom: 2rem; /* Margen inferior */
+}
+
+/* Caja del logo */
+.logo-box {
+  display: inline-block; /* Bloque en línea */
+  background: white; /* Fondo blanco */
+  padding: 1.5rem; /* Relleno */
+  border-radius: 1.5rem; /* Bordes redondeados */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra */
+  margin-bottom: 1rem; /* Margen inferior */
+}
+
+/* Ícono del logo */
+.logo-box span {
+  font-size: 3.5rem; /* Tamaño grande */
+}
+
+/* Título del encabezado */
+.header h1 {
+  font-size: 2rem; /* Tamaño de fuente */
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Subtítulo del encabezado */
+.header p {
+  color: #6b7280; /* Color gris */
+  font-size: 1rem; /* Tamaño de fuente */
+}
+
+/* Tarjeta del formulario */
+.card {
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+  border-radius: 2rem; /* Bordes redondeados */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15); /* Sombra */
+  overflow: hidden; /* Ocultar desbordamiento */
+  backdrop-filter: blur(10px); /* Filtro de fondo */
+}
+
+/* Pestañas de login y registro */
+.tabs {
+  display: flex; /* Flexbox */
+  border-bottom: 1px solid #e5e7eb; /* Borde inferior */
+}
+
+/* Estilos base para pestañas */
+.tab {
+  flex: 1; /* Ocupar espacio igual */
+  padding: 1.2rem; /* Relleno */
+  text-align: center; /* Centrar texto */
+  font-weight: 600; /* Negrita */
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor pointer */
+  color: #6b7280; /* Color gris */
+  transition: all 0.3s; /* Transición suave */
+  border-bottom: 2px solid transparent; /* Borde inferior transparente */
+  text-decoration: none; /* Sin subrayado */
+  display: block; /* Bloque */
+}
+
+/* Pestaña activa de login */
+.tabs .tab-login.active,
+.tabs .tab-register.active {
+  color: #f59e0b; /* Color naranja */
+  background: #fffbeb; /* Fondo amarillo claro */
+  border-bottom-color: #f59e0b; /* Borde naranja */
+}
+
+/* Pestaña inactiva */
+.tabs .tab-login:not(.active),
+.tabs .tab-register:not(.active) {
+  color: #6b7280; /* Color gris */
+  background: transparent; /* Fondo transparente */
+  border-bottom-color: transparent; /* Borde transparente */
+}
+
+/* Hover en pestañas */
+.tab:hover {
+  background: #f9fafb; /* Fondo gris claro */
+}
+
+/* Contenedor del formulario */
+.form-container {
+  padding: 2rem; /* Relleno */
+}
+
+/* Vista del formulario oculta por defecto */
+.form-view {
+  display: none; /* Oculta */
+}
+
+/* Mostrar vista de login cuando tab-login está activo */
+#tab-login:target ~ .form-container #login-view,
+.form-container #login-view {
+  display: block; /* Mostrar */
+}
+
+/* Ocultar vista de login cuando tab-register está activo */
+#tab-register:target ~ .form-container #login-view {
+  display: none; /* Ocultar */
+}
+
+/* Mostrar vista de registro cuando tab-register está activo */
+#tab-register:target ~ .form-container #register-view {
+  display: block; /* Mostrar */
+}
+
+/* Grupo de entrada */
+.input-group {
+  position: relative; /* Posición relativa */
+  margin-bottom: 1.5rem; /* Margen inferior */
+}
+
+/* Ícono de entrada */
+.input-icon {
+  position: absolute; /* Posición absoluta */
+  left: 1rem; /* Izquierda */
+  top: 50%; /* Centro vertical */
+  transform: translateY(-50%); /* Centrar */
+  color: #9ca3af; /* Color gris */
+  width: 20px; /* Ancho */
+  height: 20px; /* Alto */
+}
+
+/* Estilos para inputs */
+input {
+  width: 100%; /* Ancho completo */
+  padding: 0.875rem 1rem 0.875rem 3rem; /* Relleno con espacio para ícono */
+  border: 1px solid #d1d5db; /* Borde gris */
+  border-radius: 0.75rem; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de fuente */
+  transition: all 0.3s; /* Transición suave */
+  outline: none; /* Sin outline */
+}
+
+/* Focus en inputs */
+input:focus {
+  border-color: #f59e0b; /* Borde naranja */
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); /* Sombra naranja */
+}
+
+/* Enlace de contraseña olvidada */
+.forgot-password {
+  text-align: right; /* Alinear a la derecha */
+  margin-bottom: 1.5rem; /* Margen inferior */
+}
+
+/* Estilos para el enlace */
+.forgot-password a {
+  color: #f59e0b; /* Color naranja */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 0.875rem; /* Tamaño pequeño */
+  transition: color 0.3s; /* Transición en color */
+}
+
+/* Hover en enlace */
+.forgot-password a:hover {
+  color: #d97706; /* Color naranja oscuro */
+}
+
+/* Selector de tipo de usuario */
+.user-type-selector {
+  background: #f9fafb; /* Fondo gris claro */
+  padding: 1rem; /* Relleno */
+  border-radius: 0.75rem; /* Bordes redondeados */
+  margin-bottom: 1.5rem; /* Margen inferior */
+}
+
+/* Texto del selector */
+.user-type-selector p {
+  font-size: 0.875rem; /* Tamaño pequeño */
+  color: #6b7280; /* Color gris */
+  margin-bottom: 0.75rem; /* Margen inferior */
+  font-weight: 500; /* Peso medio */
+}
+
+/* Botones de tipo de usuario */
+.user-type-buttons {
+  display: flex; /* Flexbox */
+  gap: 0.75rem; /* Espacio entre botones */
+}
+
+/* Estilos base para botones de tipo */
+.user-type-btn {
+  flex: 1; /* Ocupar espacio igual */
+  padding: 0.75rem; /* Relleno */
+  border: 2px solid #e5e7eb; /* Borde gris */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  background: white; /* Fondo blanco */
+  cursor: pointer; /* Cursor pointer */
+  transition: all 0.3s; /* Transición suave */
+  font-weight: 500; /* Peso medio */
+  color: #6b7280; /* Color gris */
+  text-decoration: none; /* Sin subrayado */
+  display: block; /* Bloque */
+  text-align: center; /* Centrar texto */
+}
+
+/* Ocultar radio buttons */
+input[type="radio"] {
+  display: none; /* Ocultar */
+}
+
+/* Estilos cuando usuario está seleccionado */
+#user-type-usuario:checked ~ .user-type-buttons label[for="user-type-usuario"],
+.user-type-buttons label[for="user-type-usuario"] {
+  border-color: #f59e0b; /* Borde naranja */
+  background: #fffbeb; /* Fondo amarillo */
+  color: #f59e0b; /* Color naranja */
+}
+
+/* Estilos cuando admin está seleccionado */
+#user-type-admin:checked ~ .user-type-buttons label[for="user-type-admin"] {
+  border-color: #f59e0b; /* Borde naranja */
+  background: #fffbeb; /* Fondo amarillo */
+  color: #f59e0b; /* Color naranja */
+}
+
+/* Reset cuando admin seleccionado */
+#user-type-admin:checked ~ .user-type-buttons label[for="user-type-usuario"] {
+  border-color: #e5e7eb; /* Borde gris */
+  background: white; /* Fondo blanco */
+  color: #6b7280; /* Color gris */
+}
+
+/* Hover en botones de tipo */
+.user-type-btn:hover {
+  border-color: #d1d5db; /* Borde gris oscuro */
+  background: #f9fafb; /* Fondo gris claro */
+}
+
+/* Botón de envío */
+.submit-btn {
+  width: 100%; /* Ancho completo */
+  padding: 1rem; /* Relleno */
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); /* Gradiente */
+  color: white; /* Color blanco */
+  border: none; /* Sin borde */
+  border-radius: 0.75rem; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de fuente */
+  font-weight: 600; /* Negrita */
+  cursor: pointer; /* Cursor pointer */
+  transition: all 0.3s; /* Transición suave */
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); /* Sombra */
+}
+
+/* Hover en botón de envío */
+.submit-btn:hover {
+  transform: translateY(-2px); /* Mover arriba */
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); /* Sombra más grande */
+}
+
+/* Active en botón de envío */
+.submit-btn:active {
+  transform: translateY(0); /* Reset */
+}
+
+/* Pie de página del formulario */
+.footer {
+  padding: 1.5rem 2rem; /* Relleno */
+  text-align: center; /* Centrar texto */
+  font-size: 0.875rem; /* Tamaño pequeño */
+  color: #6b7280; /* Color gris */
+  border-top: 1px solid #e5e7eb; /* Borde superior */
+}
+
+/* Enlaces en pie */
+.footer a {
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  color: #f59e0b; /* Color naranja */
+  font-weight: 600; /* Negrita */
+  cursor: pointer; /* Cursor pointer */
+  transition: color 0.3s; /* Transición en color */
+  text-decoration: none; /* Sin subrayado */
+}
+
+/* Hover en enlaces de pie */
+.footer a:hover {
+  color: #d97706; /* Color naranja oscuro */
+}
+
+/* Términos y condiciones */
+.terms {
+  text-align: center; /* Centrar */
+  margin-top: 1.5rem; /* Margen superior */
+  font-size: 0.875rem; /* Tamaño pequeño */
+  color: #6b7280; /* Color gris */
+}
+
+/* Mostrar enlace de registro en login */
+#tab-login:target ~ .footer .footer-register,
+.footer .footer-register {
+  display: inline; /* En línea */
+}
+
+/* Ocultar enlace de login en login */
+#tab-login:target ~ .footer .footer-login {
+  display: none; /* Ocultar */
+}
+
+/* Ocultar enlace de registro en registro */
+#tab-register:target ~ .footer .footer-register {
+  display: none; /* Ocultar */
+}
+
+/* Mostrar enlace de login en registro */
+#tab-register:target ~ .footer .footer-login {
+  display: inline; /* En línea */
+}
+
+/* Ocultar enlace de login por defecto */
+.footer-login {
+  display: none; /* Ocultar */
+}
+/* ========= 🔹 ESTILOS HERO (página principal) ========= */
+
+/* Contenido del hero */
+.hero-content {
+  max-width: 800px; /* Ancho máximo */
+  padding: 2rem; /* Relleno */
+  animation: fadeInUp 1s ease; /* Animación de entrada */
+}
+
+/* Título del hero */
+.hero h1 {
+  font-size: 3.5rem; /* Tamaño grande */
+  margin-bottom: 1rem; /* Margen inferior */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra de texto */
+}
+
+/* Párrafo del hero */
+.hero p {
+  font-size: 1.3rem; /* Tamaño mediano */
+  margin-bottom: 2rem; /* Margen inferior */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra de texto */
+}
+
+/* Contenedor de botones del hero */
+.hero-buttons {
+  display: flex; /* Flexbox */
+  gap: 1rem; /* Espacio entre botones */
+  justify-content: center; /* Centrar */
+  flex-wrap: wrap; /* Envolver en líneas */
+}
+
+/* Botón primario */
+.btn-primary {
+  background: white; /* Fondo blanco */
+  color: #f59e0b; /* Color naranja */
+  padding: 1rem 2rem; /* Relleno */
+  border-radius: 2rem; /* Bordes redondeados */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 600; /* Negrita */
+  transition: all 0.3s; /* Transición suave */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Sombra */
+  display: inline-block; /* Bloque en línea */
+}
+
+/* Hover en botón primario */
+.btn-primary:hover {
+  transform: translateY(-3px); /* Mover arriba */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* Sombra más grande */
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: transparent; /* Fondo transparente */
+  color: white; /* Color blanco */
+  padding: 1rem 2rem; /* Relleno */
+  border: 2px solid white; /* Borde blanco */
+  border-radius: 2rem; /* Bordes redondeados */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 600; /* Negrita */
+  transition: all 0.3s; /* Transición suave */
+  display: inline-block; /* Bloque en línea */
+}
+
+/* Hover en botón secundario */
+.btn-secondary:hover {
+  background: white; /* Fondo blanco */
+  color: #f59e0b; /* Color naranja */
+}
+
+/* Sección hero principal */
+.hero {
+  height: 92vh; /* Altura del 92% del viewport */
+  background-size: cover; /* Cubrir todo */
+  background-position: center; /* Centrar */
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar texto */
+  color: white; /* Color blanco */
+  position: relative; /* Posición relativa */
+  margin-top: -25px; /* Margen superior negativo */
+  margin-left: -30px; /* Margen izquierdo negativo */
+  margin-right: -30px; /* Margen derecho negativo */
+  width: calc(100% + 60px); /* Ancho calculado */
+
+  /* Animación del carrusel de imágenes */
+  animation: cambioFondo 20s infinite linear; /* Animación de cambio de fondo */
+}
+
+/* Animación de cambio de imágenes de fondo */
+@keyframes cambioFondo {
+  0% {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
+      url("../img/Chic\ 2bdr\ Ground\ Floor\ at\ El\ Faro\ Coral\ 101!.jpeg"); /* Primera imagen */
+  }
+  33% {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
+      url("../img/Hotel\ La\ Semilla\ -\ Playa\ del\ Carmen\,\ Mexico\ _.jpeg"); /* Segunda imagen */
+  }
+  66% {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
+      url("../img/_.jpeg"); /* Tercera imagen */
+  }
+  100% {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
+      url("../img/_.jjpeg.jpeg"); /* Cuarta imagen */
+  }
+}
+
+/* Animación de fade in hacia arriba */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* Opacidad inicial */
+    transform: translateY(30px); /* Posición inicial abajo */
+  }
+  to {
+    opacity: 1; /* Opacidad final */
+    transform: translateY(0); /* Posición final */
+  }
+}
+
+/* ========= 🔹 ESTILOS SECCIONES GENERALES ========= */
+
+/* Estilos base para secciones */
+.section {
+  padding: 5rem 2rem; /* Relleno grande */
+  max-width: 1200px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar */
+}
+
+/* Título de sección */
+.section-title {
+  text-align: center; /* Centrar */
+  font-size: 2.5rem; /* Tamaño grande */
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 1rem; /* Margen inferior */
+}
+
+/* Subtítulo de sección */
+.section-subtitle {
+  text-align: center; /* Centrar */
+  color: #6b7280; /* Color gris */
+  font-size: 1.1rem; /* Tamaño mediano */
+  margin-bottom: 3rem; /* Margen inferior */
+}
+
+/* ========= 🔹 CARRUSEL DE HABITACIONES ========= */
+
+/* Contenedor del carrusel */
+.carousel {
+  position: relative; /* Posición relativa */
+  overflow: hidden; /* Ocultar desbordamiento */
+  border-radius: 1rem; /* Bordes redondeados */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1); /* Sombra */
+}
+
+/* Pista del carrusel */
+.carousel-track {
+  display: flex; /* Flexbox */
+  transition: transform 0.5s ease; /* Transición suave */
+}
+
+/* Slide del carrusel */
+.carousel-slide {
+  min-width: 100%; /* Ancho mínimo 100% */
+  position: relative; /* Posición relativa */
+}
+
+/* Tarjeta de habitación */
+.room-card {
+  background: white; /* Fondo blanco */
+  border-radius: 1rem; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar desbordamiento */
+  display: flex; /* Flexbox */
+  flex-direction: column; /* Dirección columna */
+  height: 700px; /* Altura fija */
+}
+
+/* Imagen de habitación */
+.room-image {
+  width: 100%;                 
+  height: 600px;               /* contenedor más alto */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   position: relative;
+  font-size: 4rem;
+  border-radius: 0.5rem;
+  overflow: hidden;  
+  background-size: cover;  
+  background-position: center;   /* centra la imagen */
+  background-repeat: no-repeat;  /* no se repite */
+  background-color: #f5f5f5;     /* color de fondo para espacios vacíos */
+}
+
+/* Imagen individual por tarjeta con gradiente overlay */
+.room1 {
+  background-image: 
+    url('../img/salas/sala1.webp');
+}
+
+.room2 {
+  background-image: 
+    url('../img/salas/ejecutiva.png');
+}
+
+.room3 {
+  background-image: 
+    url('../img/salas/familiar.png');
+}
+
+
+
+.reserve-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;          /* Tamaño del botón */
+  background: linear-gradient(135deg, #f59e0b, #f97316); /* Gradiente naranja */
+  color: white;                  /* Texto blanco */
+  font-size: 1.2rem;             /* Tamaño de fuente */
+  font-weight: bold;
+  text-decoration: none;         /* Quita subrayado */
+  border-radius: 0.8rem;         /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra suave */
+  transition: all 0.3s ease;     /* Animación suave al pasar el mouse */
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Efecto hover */
+.reserve-button:hover {
+  transform: translateY(-1px);   /* Levanta un poco el botón */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #f97316, #f59e0b); /* Gradiente invertido */
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .reserve-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Insignia de habitación */
+.room-badge {
+  position: absolute; /* Posición absoluta */
+  top: 1rem; /* Arriba */
+  right: 1rem; /* Derecha */
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+  padding: 0.5rem 1rem; /* Relleno */
+  border-radius: 2rem; /* Bordes redondeados */
+  font-size: 0.875rem; /* Tamaño pequeño */
+  font-weight: 600; /* Negrita */
+  color: #f59e0b; /* Color naranja */
+}
+
+/* Contenido de habitación */
+.room-content {
+  padding: 2rem; /* Relleno */
+  flex: 1; /* Ocupar espacio restante */
+  display: flex; /* Flexbox */
+  flex-direction: column; /* Dirección columna */
+}
+
+/* Título de habitación */
+.room-content h3 {
+  font-size: 1.5rem; /* Tamaño mediano */
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Características de habitación */
+.room-features {
+  display: flex; /* Flexbox */
+  gap: 1rem; /* Espacio entre elementos */
+  margin: 1rem 0; /* Márgenes verticales */
+  flex-wrap: wrap; /* Envolver */
+}
+
+/* Elemento de característica */
+.feature {
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  gap: 0.5rem; /* Espacio */
+  color: #6b7280; /* Color gris */
+  font-size: 0.9rem; /* Tamaño pequeño */
+}
+
+/* Precio de habitación */
+.room-price {
+  font-size: 2rem; /* Tamaño grande */
+  color: #f59e0b; /* Color naranja */
+  font-weight: bold; /* Negrita */
+  margin-top: auto; /* Empujar abajo */
+}
+
+/* Texto adicional en precio */
+.room-price span {
+  font-size: 1rem; /* Tamaño normal */
+  color: #6b7280; /* Color gris */
+  font-weight: normal; /* Peso normal */
+}
+
+/* Controles del carrusel */
+.carousel-controls {
+  display: flex; /* Flexbox */
+  justify-content: center; /* Centrar */
+  gap: 1rem; /* Espacio */
+  margin-top: 2rem; /* Margen superior */
+}
+
+/* Punto del carrusel */
+.carousel-dot {
+  width: 12px; /* Ancho */
+  height: 12px; /* Alto */
+  border-radius: 50%; /* Circular */
+  background: #d1d5db; /* Fondo gris */
+  cursor: pointer; /* Cursor pointer */
+  transition: all 0.3s; /* Transición suave */
+}
+
+/* Hover en punto */
+.carousel-dot:hover {
+  background: #9ca3af; /* Fondo gris oscuro */
+}
+
+/* Radio buttons ocultos */
+.carousel-radio {
+  display: none; /* Ocultar */
+}
+
+/* Transformaciones para slides */
+#dot1:checked ~ .carousel .carousel-track { transform: translateX(0%); } /* Primer slide */
+#dot2:checked ~ .carousel .carousel-track { transform: translateX(-100%); } /* Segundo slide */
+#dot3:checked ~ .carousel .carousel-track { transform: translateX(-200%); } /* Tercer slide */
+
+/* Estilos para punto activo */
+#dot1:checked ~ .carousel-controls label[for="dot1"],
+#dot2:checked ~ .carousel-controls label[for="dot2"],
+#dot3:checked ~ .carousel-controls label[for="dot3"] {
+  background: #f59e0b; /* Fondo naranja */
+  width: 32px; /* Ancho expandido */
+  border-radius: 6px; /* Bordes redondeados */
+}
+
+/* ========= 🔹 ÁREAS DEL HOTEL ========= */
+
+/* Grid de áreas */
+.areas-grid {
+  display: grid; /* CSS Grid */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+  gap: 2rem; /* Espacio entre elementos */
+  margin-top: 2rem; /* Margen superior */
+}
+
+/* Tarjeta de área */
+.area-card {
+  background: white; /* Fondo blanco */
+  border-radius: 1rem; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar desbordamiento */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transición suave */
+}
+
+/* Hover en tarjeta de área */
+.area-card:hover {
+  transform: translateY(-10px); /* Mover arriba */
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15); /* Sombra más grande */
+}
+
+/* Imagen de área */
+.area-image {
+  height: 200px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 4rem; 
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  background-size: cover;       /* la imagen llena todo el contenedor */
+  background-position: center;  /* centra la imagen */
+  background-repeat: no-repeat;
+}
+
+/* Fondos individuales por tarjeta */
+.area1 {
+  background-image: 
+    url('../img/servicios/pici.webp');
+}
+
+.area2 {
+  background-image: 
+    url('../img/servicios/jacuzzi-spa-hotel-dann-carlton-bucaramanga-bucaramanga-colombia-4_24062598563_o.avif');
+}
+
+.area3 {
+  background-image: 
+    url('../img/_.jpeg');
+}
+
+.area4 {
+  background-image: 
+    url('../img/servicios/JARDINERIA-PARA-HOTELES.webp');
+}
+
+.area5 {
+  background-image: 
+    url('../img/_.jjpeg.jpeg');
+}
+
+.area6 {
+  background-image: 
+    url('../img/servicios/Libr.png');
+}
+/* Contenido de área */
+.area-content {
+  padding: 1.5rem; /* Relleno */
+}
+
+/* Título de área */
+.area-content h3 {
+  font-size: 1.3rem; /* Tamaño mediano */
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Descripción de área */
+.area-content p {
+  color: #6b7280; /* Color gris */
+  line-height: 1.6; /* Altura de línea */
+}
+
+/* ========= 🔹 SERVICIOS ========= */
+
+/* Grid de servicios: 3 columnas */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Tablets: 2 columnas */
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Móviles: 1 columna */
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta de servicio */
+.service-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border-radius: 1rem;
+  transition: transform 0.3s;
   overflow: hidden;
 }
 
-.bg-decoration {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
+/* Hover */
+.service-card:hover {
+  transform: scale(1.05);
 }
 
-.decoration-1 {
-  width: 300px;
-  height: 300px;
-  background: #fbbf24;
-  top: 10%;
-  left: 5%;
-}
-
-.decoration-2 {
-  width: 300px;
-  height: 300px;
-  background: #fb923c;
-  top: 20%;
-  right: 5%;
-  animation-delay: 1s;
-}
-
-.decoration-3 {
-  width: 300px;
-  height: 300px;
-  background: #f97316;
-  bottom: 10%;
-  left: 30%;
-  animation-delay: 2s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-.container {
+/* Imagen de servicio */
+.service-card img {
   width: 100%;
-  max-width: 480px;
-  margin: auto;  /* 🔹 para centrar en tablets y laptops */
-  position: relative;
-  z-index: 10;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.logo-box {
-  display: inline-block;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.75rem;
   margin-bottom: 1rem;
 }
 
-.logo-box span {
-  font-size: 3.5rem;
-}
-
-.header h1 {
-  font-size: 2rem;
+/* Título */
+.service-card h3 {
+  font-size: 1.2rem;
   color: #1f2937;
   margin-bottom: 0.5rem;
 }
 
-.header p {
+/* Descripción */
+.service-card p {
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 2rem;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
+
+
+/* ========= 🔹 ESTILOS CONTACTO ========= */
+
+/* Decoraciones de fondo animadas para página de contacto */
+.bg-decoration {
+  position: fixed; /* Posición fija */
+  border-radius: 50%; /* Circular */
+  filter: blur(60px); /* Desenfoque */
+  opacity: 0.3; /* Opacidad baja */
+  animation: float 6s ease-in-out infinite; /* Animación flotante */
+  z-index: 0; /* Z-index bajo */
 }
 
-.tabs {
-  display: flex;
-  border-bottom: 1px solid #e5e7eb;
+/* Primera decoración */
+.decoration-1 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #fbbf24; /* Color amarillo */
+  top: 10%; /* Posición arriba */
+  left: 5%; /* Posición izquierda */
 }
 
-.tab {
-  flex: 1;
-  padding: 1.2rem;
-  text-align: center;
-  font-weight: 600;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #6b7280;
-  transition: all 0.3s;
-  border-bottom: 2px solid transparent;
-  text-decoration: none;
-  display: block;
+/* Segunda decoración */
+.decoration-2 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #fb923c; /* Color naranja */
+  top: 20%; /* Posición arriba */
+  right: 5%; /* Posición derecha */
+  animation-delay: 1s; /* Retraso */
 }
 
-.tabs .tab-login.active,
-.tabs .tab-register.active {
-  color: #f59e0b;
-  background: #fffbeb;
-  border-bottom-color: #f59e0b;
+/* Tercera decoración */
+.decoration-3 {
+  width: 300px; /* Ancho */
+  height: 300px; /* Alto */
+  background: #f97316; /* Color naranja oscuro */
+  bottom: 10%; /* Posición abajo */
+  left: 30%; /* Posición izquierda */
+  animation-delay: 2s; /* Retraso */
 }
 
-.tabs .tab-login:not(.active),
-.tabs .tab-register:not(.active) {
-  color: #6b7280;
-  background: transparent;
-  border-bottom-color: transparent;
+/* Animación de flotación */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); } /* Posición inicial/final */
+  50% { transform: translateY(-20px); } /* Mitad */
 }
 
-.tab:hover {
-  background: #f9fafb;
-}
 
-.form-container {
-  padding: 2rem;
-}
-
-.form-view {
-  display: none;
-}
-
-#tab-login:target ~ .form-container #login-view,
-.form-container #login-view {
-  display: block;
-}
-
-#tab-register:target ~ .form-container #login-view {
-  display: none;
-}
-
-#tab-register:target ~ .form-container #register-view {
-  display: block;
-}
-
-.input-group {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
-.input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #9ca3af;
-  width: 20px;
-  height: 20px;
-}
-
-input {
-  width: 100%;
-  padding: 0.875rem 1rem 0.875rem 3rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  transition: all 0.3s;
-  outline: none;
-}
-
-input:focus {
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-}
-
-.forgot-password {
-  text-align: right;
-  margin-bottom: 1.5rem;
-}
-
-.forgot-password a {
-  color: #f59e0b;
-  text-decoration: none;
-  font-size: 0.875rem;
-  transition: color 0.3s;
-}
-
-.forgot-password a:hover {
-  color: #d97706;
-}
-
-.user-type-selector {
-  background: #f9fafb;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.user-type-selector p {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-}
-
-.user-type-buttons {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.user-type-btn {
-  flex: 1;
-  padding: 0.75rem;
-  border: 2px solid #e5e7eb;
-  border-radius: 0.5rem;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-weight: 500;
-  color: #6b7280;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-#user-type-usuario:checked ~ .user-type-buttons label[for="user-type-usuario"],
-.user-type-buttons label[for="user-type-usuario"] {
-  border-color: #f59e0b;
-  background: #fffbeb;
-  color: #f59e0b;
-}
-
-#user-type-admin:checked ~ .user-type-buttons label[for="user-type-admin"] {
-  border-color: #f59e0b;
-  background: #fffbeb;
-  color: #f59e0b;
-}
-
-#user-type-admin:checked ~ .user-type-buttons label[for="user-type-usuario"] {
-  border-color: #e5e7eb;
-  background: white;
-  color: #6b7280;
-}
-
-.user-type-btn:hover {
-  border-color: #d1d5db;
-  background: #f9fafb;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 1rem;
+/* Header de contacto */
+header {
   background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
   color: white;
-  border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-}
-
-.submit-btn:active {
-  transform: translateY(0);
-}
-
-.footer {
-  padding: 1.5rem 2rem;
+  padding: 4rem 5vw; /* padding horizontal relativo al ancho de pantalla */
   text-align: center;
-  font-size: 0.875rem;
-  color: #6b7280;
-  border-top: 1px solid #e5e7eb;
+  margin: 0 auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 2rem; /* tamaño base para desktop */
 }
 
-.footer a {
-  background: none;
-  border: none;
-  color: #f59e0b;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s;
-  text-decoration: none;
+/* Caja del logo en header */
+.logo-box {
+  display: inline-block; /* Bloque en línea */
+  background: white; /* Fondo blanco */
+  padding: 1.5rem; /* Relleno */
+  border-radius: 1.5rem; /* Bordes redondeados */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra */
+  margin-bottom: 1rem; /* Margen inferior */
 }
 
-.footer a:hover {
-  color: #d97706;
+/* Ícono del logo */
+.logo-box span {
+  font-size: 3rem; /* Tamaño grande */
 }
 
-.terms {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.875rem;
-  color: #6b7280;
+/* Título del header */
+header h1 {
+  font-size: 2.5rem; /* Tamaño grande */
+  margin-bottom: 0.5rem; /* Margen inferior */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra de texto */
 }
 
-#tab-login:target ~ .footer .footer-register,
-.footer .footer-register {
-  display: inline;
+/* Subtítulo del header */
+header p {
+  font-size: 1.2rem; /* Tamaño mediano */
+  opacity: 0.95; /* Opacidad */
 }
 
-#tab-login:target ~ .footer .footer-login {
-  display: none;
+/* Contenido principal */
+.content {
+  padding: 3rem 2rem; /* Relleno */
 }
 
-#tab-register:target ~ .footer .footer-register {
-  display: none;
+/* Caja de dirección */
+.address-box {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7); /* Gradiente */
+  padding: 2rem; /* Relleno */
+  border-radius: 1rem; /* Bordes redondeados */
+  margin-bottom: 3rem; /* Margen inferior */
+  text-align: center; /* Centrar texto */
+  border: 2px solid #fbbf24; /* Borde amarillo */
 }
 
-#tab-register:target ~ .footer .footer-login {
-  display: inline;
+/* Título de dirección */
+.address-box h3 {
+  font-size: 1.8rem; /* Tamaño grande */
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 1rem; /* Margen inferior */
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  gap: 0.5rem; /* Espacio */
 }
 
-.footer-login {
-  display: none;
+/* Texto de dirección */
+.address-box p {
+  font-size: 1.1rem; /* Tamaño mediano */
+  color: #6b7280; /* Color gris */
+  line-height: 1.8; /* Altura de línea */
 }
-.hero {
-      height: 90vh;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(249, 115, 22, 0.8)),
-                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23fef3c7" width="1200" height="600"/><circle cx="200" cy="150" r="100" fill="%23fed7aa" opacity="0.5"/><circle cx="900" cy="400" r="150" fill="%23fecaca" opacity="0.5"/></svg>');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      position: relative;
-      margin-top: 0;
-      margin-left: -30px;
-      margin-right: -30px;
-      width: calc(100% + 60px);
-    }
 
-    .hero-content {
-      max-width: 800px;
-      padding: 2rem;
-      animation: fadeInUp 1s ease;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: white;
-      color: #f59e0b;
-      padding: 1rem 2rem;
-      border-radius: 2rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: inline-block;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      padding: 1rem 2rem;
-      border: 2px solid white;
-      border-radius: 2rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      display: inline-block;
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      color: #f59e0b;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Secciones */
-    .section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #1f2937;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: #6b7280;
-      font-size: 1.1rem;
-      margin-bottom: 3rem;
-    }
-
-    /* Carrusel de habitaciones */
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      position: relative;
-    }
-
-    .room-card {
-      background: white;
-      border-radius: 1rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 500px;
-    }
-
-    .room-image {
-      height: 300px;
-      background: linear-gradient(135deg, #fbbf24, #fb923c);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      position: relative;
-    }
-
-    .room-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #f59e0b;
-    }
-
-    .room-content {
-      padding: 2rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .room-content h3 {
-      font-size: 1.5rem;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-    }
-
-    .room-features {
-      display: flex;
-      gap: 1rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
-    }
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
-
-    .room-price {
-      font-size: 2rem;
-      color: #f59e0b;
-      font-weight: bold;
-      margin-top: auto;
-    }
-
-    .room-price span {
-      font-size: 1rem;
-      color: #6b7280;
-      font-weight: normal;
-    }
-
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .carousel-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #d1d5db;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .carousel-dot:hover {
-      background: #9ca3af;
-    }
-
-    .carousel-radio {
-      display: none;
-    }
-
-    #dot1:checked ~ .carousel .carousel-track { transform: translateX(0%); }
-    #dot2:checked ~ .carousel .carousel-track { transform: translateX(-100%); }
-    #dot3:checked ~ .carousel .carousel-track { transform: translateX(-200%); }
-
-    #dot1:checked ~ .carousel-controls label[for="dot1"],
-    #dot2:checked ~ .carousel-controls label[for="dot2"],
-    #dot3:checked ~ .carousel-controls label[for="dot3"] {
-      background: #f59e0b;
-      width: 32px;
-      border-radius: 6px;
-    }
-
-    /* Areas del hotel */
-    .areas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .area-card {
-      background: white;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .area-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    }
-
-    .area-image {
-      height: 200px;
-      background: linear-gradient(135deg, #fef3c7, #fed7aa);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-    }
-
-    .area-content {
-      padding: 1.5rem;
-    }
-
-    .area-content h3 {
-      font-size: 1.3rem;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-    }
-
-    .area-content p {
-      color: #6b7280;
-      line-height: 1.6;
-    }
-
-    /* Servicios */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .service-card {
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, #fffbeb, #fef3c7);
-      border-radius: 1rem;
-      transition: transform 0.3s;
-    }
-
-    .service-card:hover {
-      transform: scale(1.05);
-    }
-
-    .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.2rem;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-    }
-
-    .service-card p {
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
-.bg-decoration {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .decoration-1 {
-            width: 300px;
-            height: 300px;
-            background: #fbbf24;
-            top: 10%;
-            left: 5%;
-        }
-
-        .decoration-2 {
-            width: 300px;
-            height: 300px;
-            background: #fb923c;
-            top: 20%;
-            right: 5%;
-            animation-delay: 1s;
-        }
-
-        .decoration-3 {
-            width: 300px;
-            height: 300px;
-            background: #f97316;
-            bottom: 10%;
-            left: 30%;
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 2rem;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .logo-box {
-            display: inline-block;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-bottom: 1rem;
-        }
-
-        .logo-box span {
-            font-size: 3rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-        }
-
-        /* Contenido principal */
-        .content {
-            padding: 3rem 2rem;
-        }
-
-        /* Caja de dirección */
-        .address-box {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            padding: 2rem;
-            border-radius: 1rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            border: 2px solid #fbbf24;
-        }
-
-        .address-box h3 {
-            font-size: 1.8rem;
-            color: #1f2937;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .address-box p {
-            font-size: 1.1rem;
-            color: #6b7280;
-            line-height: 1.8;
-        }
-
-        /* Grid de contacto */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-
-        .contact-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #f59e0b, #f97316);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .contact-card h3 {
-            color: #1f2937;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .contact-card p {
-            color: #6b7280;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .contact-card a {
-            color: #f59e0b;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-card a:hover {
-            color: #f97316;
-        }
-
-        /* Sección del mapa */
-        .map-section {
-            margin-top: 3rem;
-        }
-
-        .map-section h2 {
-            text-align: center;
-            color: #1f2937;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 450px;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 3px solid #fbbf24;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Redes sociales */
-        .social-section {
-            margin-top: 3rem;
-            text-align: center;
-        }
-
-        .social-section h3 {
-            color: #1f2937;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #f59e0b, #f97316);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .social-btn:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-        }
-
-        /* Horarios */
-        .schedule-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            margin-top: 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .schedule-box h3 {
-            color: #1f2937;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .schedule-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem;
-            background: #fffbeb;
-            border-radius: 0.75rem;
-            border-left: 4px solid #f59e0b;
-        }
-
-        .schedule-item .day {
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .schedule-item .hours {
-            color: #6b7280;
-        }
-/* ========= ESTILOS PÁGINA RESERVAS ========= */
+/* Grid de contacto */
+.contact-grid {
+  display: grid; /* CSS Grid */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+  gap: 2rem; /* Espacio */
+  margin-bottom: 3rem; /* Margen inferior */
+}
+
+/* Tarjeta de contacto */
+.contact-card {
+  background: white; /* Fondo blanco */
+  padding: 2rem; /* Relleno */
+  border-radius: 1rem; /* Bordes redondeados */
+  text-align: center; /* Centrar texto */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
+}
+
+/* Hover en tarjeta de contacto */
+.contact-card:hover {
+  transform: translateY(-5px); /* Mover arriba */
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15); /* Sombra más grande */
+}
+
+/* Ícono de contacto */
+.contact-icon {
+  width: 70px; /* Ancho */
+  height: 70px; /* Alto */
+  background: linear-gradient(135deg, #f59e0b, #f97316); /* Gradiente */
+  border-radius: 50%; /* Circular */
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  margin: 0 auto 1.5rem; /* Margen inferior */
+  font-size: 2rem; /* Tamaño de ícono */
+  color: white; /* Color blanco */
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); /* Sombra */
+}
+
+/* Título de tarjeta de contacto */
+.contact-card h3 {
+  color: #1f2937; /* Color gris oscuro */
+  margin-bottom: 1rem; /* Margen inferior */
+  font-size: 1.4rem; /* Tamaño mediano */
+}
+
+/* Descripción de contacto */
+.contact-card p {
+  color: #6b7280; /* Color gris */
+  margin-bottom: 1rem; /* Margen inferior */
+  font-size: 0.95rem; /* Tamaño pequeño */
+}
+
+/* Enlaces de contacto */
+.contact-card a {
+  color: #f59e0b; /* Color naranja */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 600; /* Negrita */
+  transition: color 0.3s ease; /* Transición en color */
+  display: block; /* Bloque */
+  margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Hover en enlaces */
+.contact-card a:hover {
+  color: #f97316; /* Color naranja oscuro */
+}
+
+/* Sección del mapa */
+.map-section {
+  margin-top: 3rem; /* Margen superior */
+}
+
+/* Título de sección de mapa */
+.map-section h2 {
+  text-align: center; /* Centrar */
+  color: #1f2937; /* Color gris oscuro */
+  font-size: 2rem; /* Tamaño grande */
+  margin-bottom: 2rem; /* Margen inferior */
+}
+
+/* Contenedor del mapa */
+.map-container {
+  width: 100%; /* Ancho completo */
+  height: 450px; /* Altura */
+  border-radius: 1rem; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar desbordamiento */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra */
+  border: 3px solid #fbbf24; /* Borde amarillo */
+}
+
+/* Iframe del mapa */
+.map-container iframe {
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  border: none; /* Sin borde */
+}
+
+/* Sección de redes sociales */
+.social-section {
+  margin-top: 3rem; /* Margen superior */
+  text-align: center; /* Centrar */
+}
+
+/* Título de redes sociales */
+.social-section h3 {
+  color: #1f2937; /* Color gris oscuro */
+  font-size: 1.5rem; /* Tamaño mediano */
+  margin-bottom: 1.5rem; /* Margen inferior */
+}
+
+/* Enlaces de redes sociales */
+.social-links {
+  display: flex; /* Flexbox */
+  justify-content: center; /* Centrar */
+  gap: 1.5rem; /* Espacio */
+  flex-wrap: wrap; /* Envolver */
+}
+
+/* Botón de red social */
+.social-btn {
+  width: 60px; /* Ancho */
+  height: 60px; /* Alto */
+  background: linear-gradient(135deg, #f59e0b, #f97316); /* Gradiente */
+  border-radius: 50%; /* Circular */
+  display: flex; /* Flexbox */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  color: white; /* Color blanco */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 1.5rem; /* Tamaño de ícono */
+  transition: all 0.3s ease; /* Transición suave */
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); /* Sombra */
+}
+
+/* Hover en botón de red social */
+.social-btn:hover {
+  transform: scale(1.1) translateY(-3px); /* Escalar y mover arriba */
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); /* Sombra más grande */
+}
+
+/* Caja de horarios */
+.schedule-box {
+  background: white; /* Fondo blanco */
+  padding: 2rem; /* Relleno */
+  border-radius: 1rem; /* Bordes redondeados */
+  margin-top: 3rem; /* Margen superior */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
+}
+
+/* Título de horarios */
+.schedule-box h3 {
+  color: #1f2937; /* Color gris oscuro */
+  font-size: 1.5rem; /* Tamaño mediano */
+  margin-bottom: 1.5rem; /* Margen inferior */
+  text-align: center; /* Centrar */
+}
+
+/* Grid de horarios */
+.schedule-grid {
+  display: grid; /* CSS Grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
+  gap: 1.5rem; /* Espacio */
+}
+
+/* Item de horario */
+.schedule-item {
+  display: flex; /* Flexbox */
+  justify-content: space-between; /* Espacio entre */
+  padding: 1rem; /* Relleno */
+  background: #fffbeb; /* Fondo amarillo claro */
+  border-radius: 0.75rem; /* Bordes redondeados */
+  border-left: 4px solid #f59e0b; /* Borde izquierdo naranja */
+}
+
+/* Día del horario */
+.schedule-item .day {
+  color: #1f2937; /* Color gris oscuro */
+  font-weight: 600; /* Negrita */
+}
+
+/* Horas del horario */
+.schedule-item .hours {
+  color: #6b7280; /* Color gris */
+}
+/* ========= 🔹 ESTILOS PÁGINA RESERVAS ========= */
 .reservas-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -1463,3 +1746,26 @@ input[type="radio"] {
     padding: 1.2rem;
   }
 }
+/* ========= NAVBAR RESPONSIVE ========= */
+/* ===== RESPONSIVE CELULAR ===== */
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 10px 15px;
+  }
+
+  .nav-left {
+    font-size: 1rem; /* se reduce el tamaño del logo/texto */
+  }
+
+  .nav-right {
+    gap: 12px; /* se reduce el espacio entre links */
+    justify-content: flex-end; /* los links se alinean a la derecha */
+  }
+
+  .nav-right a {
+    font-size: 0.9rem; /* se reduce tamaño del texto */
+    white-space: nowrap; /* evita que los links hagan salto de línea */
+  }
+}
+
+
