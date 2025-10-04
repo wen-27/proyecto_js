@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel el Rincón del Carmen</title>
+  <script type="module" defer src="js/app.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navegación -->
+  <nav>
+    <a href="#login">Login</a>
+    <a href="#inicio">Inicio</a>
+    <a href="#reservas">Reservas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- Página Inicio (Login + Registro) -->
+  <section id="login" class="active login-body">
+    <div class="bg-decoration decoration-1"></div>
+    <div class="bg-decoration decoration-2"></div>
+    <div class="bg-decoration decoration-3"></div>
+
+    <div class="container">
+      <div class="header">
+        <div class="logo-box">
+          <span>🏨</span>
+        </div>
+        <h1>Hotel el Rincón del Carmen</h1>
+        <p>Tu escape perfecto te espera</p>
+      </div>
+
+      <!-- Card con login/registro -->
+      <div class="card">
+          <div class="tabs">
+            <a href="#" class="tab tab-login active">Iniciar Sesión</a>
+            <a href="#" class="tab tab-register">Registrarse</a>
+          </div>
+
+        <div class="form-container">
+          <!-- Login -->
+          <div class="form-view active" id="login-view">
+            <div class="user-type-selector">
+              <p>Selecciona tipo de usuario:</p>
+              <input type="radio" id="user-type-usuario" name="user-type" checked />
+              <input type="radio" id="user-type-admin" name="user-type" />
+              <div class="user-type-buttons">
+                <label for="user-type-usuario" class="user-type-btn">Usuario</label>
+                <label for="user-type-admin" class="user-type-btn">Administrador</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <input type="email" id="login-email" placeholder="Correo electrónico" required />
+            </div>
+
+            <div class="input-group">
+              <input type="password" id="login-password" placeholder="Contraseña" required />
+            </div>
+
+            <div class="forgot-password">
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="submit-btn">Iniciar Sesión</button>
+          </div>
+
+          <!-- Registro -->
+          <div class="form-view" id="register-view">
+            <div class="input-group">
+              <input type="text" placeholder="Número de identificación" required />
+            </div>
+            <div class="input-group">
+              <input type="text" placeholder="Nombre completo" required />
+            </div>
+            <div class="input-group">
+              <input type="text" placeholder="Nacionalidad" required />
+            </div>
+            <div class="input-group">
+              <input type="email" placeholder="Correo electrónico" required />
+            </div>
+            <div class="input-group">
+              <input type="tel" placeholder="Teléfono" required />
+            </div>
+            <div class="input-group">
+              <input type="password" placeholder="Contraseña" required />
+            </div>
+            <button type="submit" class="submit-btn">Crear Cuenta</button>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>
+            <span class="footer-register">¿No tienes cuenta? <a href="#register-view" class="tab-register">Regístrate aquí</a></span>
+            <span class="footer-login">¿Ya tienes cuenta? <a href="#login-view" class="tab-login">Inicia sesión</a></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="terms">
+        <p>Al continuar, aceptas nuestros términos y condiciones</p>
+      </div>
+    </div>
+  </section>
+ <!-- Página inicio -->
+  <section id="inicio">
+   <div class="hero">
+      <div class="hero-content">
+        <h1>Bienvenido al Paraíso</h1>
+        <p>Experimenta lujo, confort y hospitalidad en el corazón de la naturaleza</p>
+        <div class="hero-buttons">
+          <a href="#reservas" class="btn-primary">Reservar Ahora</a>
+          <a href="#habitaciones" class="btn-secondary">Ver Habitaciones</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Habitaciones - Carrusel -->
+    <div class="section" id="habitaciones">
+      <h2 class="section-title">Nuestras Habitaciones</h2>
+      <p class="section-subtitle">Descubre espacios diseñados para tu comodidad y descanso</p>
+
+      <input type="radio" name="carousel" id="dot1" class="carousel-radio" checked>
+      <input type="radio" name="carousel" id="dot2" class="carousel-radio">
+      <input type="radio" name="carousel" id="dot3" class="carousel-radio">
+
+      <div class="carousel">
+        <div class="carousel-track">
+          <!-- Habitación 1 -->
+          <div class="carousel-slide">
+            <div class="room-card">
+              <div class="room-image">
+                🛏️
+                <span class="room-badge">Más Popular</span>
+              </div>
+              <div class="room-content">
+                <h3>Suite Deluxe</h3>
+                <p>Espaciosa suite con vista panorámica, jacuzzi privado y todas las comodidades de lujo.</p>
+                <div class="room-features">
+                  <span class="feature">👥 2-4 personas</span>
+                  <span class="feature">🛏️ 2 camas</span>
+                  <span class="feature">📶 WiFi</span>
+                  <span class="feature">🍷 Minibar</span>
+                </div>
+                <div class="room-price">
+                  $250,000 <span>/ noche</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habitación 2 -->
+          <div class="carousel-slide">
+            <div class="room-card">
+              <div class="room-image">
+                🏖️
+                <span class="room-badge">Recomendada</span>
+              </div>
+              <div class="room-content">
+                <h3>Habitación Ejecutiva</h3>
+                <p>Perfecta para viajes de negocios o parejas, con escritorio y zona de trabajo.</p>
+                <div class="room-features">
+                  <span class="feature">👥 2 personas</span>
+                  <span class="feature">🛏️ 1 cama king</span>
+                  <span class="feature">📶 WiFi</span>
+                  <span class="feature">☕ Cafetera</span>
+                </div>
+                <div class="room-price">
+                  $180,000 <span>/ noche</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habitación 3 -->
+          <div class="carousel-slide">
+            <div class="room-card">
+              <div class="room-image">
+                👨‍👩‍👧‍👦
+                <span class="room-badge">Familiar</span>
+              </div>
+              <div class="room-content">
+                <h3>Habitación Familiar</h3>
+                <p>Amplio espacio para toda la familia con dos habitaciones conectadas.</p>
+                <div class="room-features">
+                  <span class="feature">👥 4-6 personas</span>
+                  <span class="feature">🛏️ 3 camas</span>
+                  <span class="feature">📶 WiFi</span>
+                  <span class="feature">🎮 Área de juegos</span>
+                </div>
+                <div class="room-price">
+                  $320,000 <span>/ noche</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <label for="dot1" class="carousel-dot"></label>
+        <label for="dot2" class="carousel-dot"></label>
+        <label for="dot3" class="carousel-dot"></label>
+      </div>
+    </div>
+
+    <!-- Áreas del Hotel -->
+    <div class="section" id="areas">
+      <h2 class="section-title">Áreas del Hotel</h2>
+      <p class="section-subtitle">Espacios diseñados para tu disfrute y relajación</p>
+
+      <div class="areas-grid">
+        <div class="area-card">
+          <div class="area-image">🏊</div>
+          <div class="area-content">
+            <h3>Piscina Infinity</h3>
+            <p>Piscina climatizada con vista panorámica, perfecta para relajarte mientras disfrutas del paisaje.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-image">🧖</div>
+          <div class="area-content">
+            <h3>Spa y Wellness</h3>
+            <p>Centro de bienestar completo con sauna, jacuzzi y tratamientos de relajación.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-image">🏋️</div>
+          <div class="area-content">
+            <h3>Gimnasio</h3>
+            <p>Equipamiento moderno disponible 24/7 para mantenerte en forma durante tu estadía.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-image">🌳</div>
+          <div class="area-content">
+            <h3>Jardines</h3>
+            <p>Amplios jardines tropicales ideales para caminar, meditar o simplemente disfrutar la naturaleza.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-image">🎯</div>
+          <div class="area-content">
+            <h3>Zona de Recreación</h3>
+            <p>Área de juegos, billar y entretenimiento para todas las edades.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-image">📚</div>
+          <div class="area-content">
+            <h3>Biblioteca</h3>
+            <p>Espacio tranquilo con colección de libros y ambiente acogedor para lectura.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Servicios -->
+    <div class="section" id="servicios">
+      <h2 class="section-title">Servicios Exclusivos</h2>
+      <p class="section-subtitle">Todo lo que necesitas para una estadía inolvidable</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🍽️</div>
+          <h3>Restaurante Gourmet</h3>
+          <p>Cocina internacional y local preparada por chefs expertos</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💆</div>
+          <h3>Masajes y Tratamientos</h3>
+          <p>Terapias personalizadas para tu bienestar completo</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚗</div>
+          <h3>Transporte</h3>
+          <p>Servicio de traslado desde y hacia el aeropuerto</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🌊</div>
+          <h3>Zonas Húmedas</h3>
+          <p>Turco, sauna y duchas escocesas para tu relajación</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">☕</div>
+          <h3>Room Service 24/7</h3>
+          <p>Servicio a la habitación disponible en todo momento</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🎉</div>
+          <h3>Eventos y Conferencias</h3>
+          <p>Salones equipados para tus reuniones y celebraciones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Página Reservas -->
+  <section id="reservas">
+  <div class="reservas-container">
+      <h1 class="reservas-title">Consulta de Disponibilidad y Reservas</h1>
+      <p class="reservas-subtitle">Encuentra tu habitación perfecta y reserva en segundos</p>
+
+      <!-- Formulario de búsqueda -->
+      <div class="search-card">
+        <h2>Buscar Disponibilidad</h2>
+        <div class="search-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha-entrada">Fecha de entrada</label>
+              <input type="date" id="fecha-entrada" required>
+            </div>
+            <div class="form-group">
+              <label for="fecha-salida">Fecha de salida</label>
+              <input type="date" id="fecha-salida" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="num-personas">Número de personas</label>
+              <select id="num-personas" required>
+                <option value="">Selecciona</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button class="btn-search">🔍 Buscar Habitaciones</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultados de búsqueda -->
+      <div class="results-section">
+        <h2>Habitaciones Disponibles</h2>
+        <div class="rooms-grid">
+          <!-- Habitación 1 -->
+          <div class="room-result-card">
+            <div class="room-result-image">🛏️</div>
+            <div class="room-result-content">
+              <div class="room-result-header">
+                <h3>Suite Deluxe</h3>
+                <span class="room-result-badge">Disponible</span>
+              </div>
+              <p class="room-result-description">Espaciosa suite con vista panorámica y jacuzzi privado</p>
+              <div class="room-result-features">
+                <span>👥 2-4 personas</span>
+                <span>🛏️ 2 camas</span>
+                <span>📶 WiFi</span>
+                <span>🍷 Minibar</span>
+                <span>🛁 Jacuzzi</span>
+              </div>
+              <div class="room-result-footer">
+                <div class="room-result-pricing">
+                  <span class="price-total">$750,000</span>
+                  <span class="price-detail">3 noches • 2 personas</span>
+                  <span class="price-per-night">$250,000 / noche</span>
+                </div>
+                <button class="btn-reserve">Reservar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habitación 2 -->
+          <div class="room-result-card">
+            <div class="room-result-image" style="background: linear-gradient(135deg, #fb923c, #f59e0b);">🏖️</div>
+            <div class="room-result-content">
+              <div class="room-result-header">
+                <h3>Habitación Ejecutiva</h3>
+                <span class="room-result-badge">Disponible</span>
+              </div>
+              <p class="room-result-description">Perfecta para viajes de negocios o parejas</p>
+              <div class="room-result-features">
+                <span>👥 2 personas</span>
+                <span>🛏️ 1 cama king</span>
+                <span>📶 WiFi</span>
+                <span>☕ Cafetera</span>
+                <span>💼 Escritorio</span>
+              </div>
+              <div class="room-result-footer">
+                <div class="room-result-pricing">
+                  <span class="price-total">$540,000</span>
+                  <span class="price-detail">3 noches • 2 personas</span>
+                  <span class="price-per-night">$180,000 / noche</span>
+                </div>
+                <button class="btn-reserve">Reservar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habitación 3 -->
+          <div class="room-result-card">
+            <div class="room-result-image" style="background: linear-gradient(135deg, #fbbf24, #fb923c);">👨‍👩‍👧‍👦</div>
+            <div class="room-result-content">
+              <div class="room-result-header">
+                <h3>Habitación Familiar</h3>
+                <span class="room-result-badge">Disponible</span>
+              </div>
+              <p class="room-result-description">Amplio espacio ideal para toda la familia</p>
+              <div class="room-result-features">
+                <span>👥 4-6 personas</span>
+                <span>🛏️ 3 camas</span>
+                <span>📶 WiFi</span>
+                <span>🎮 Área de juegos</span>
+                <span>🍿 Mini cocina</span>
+              </div>
+              <div class="room-result-footer">
+                <div class="room-result-pricing">
+                  <span class="price-total">$960,000</span>
+                  <span class="price-detail">3 noches • 4 personas</span>
+                  <span class="price-per-night">$320,000 / noche</span>
+                </div>
+                <button class="btn-reserve">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mis Reservas -->
+      <div class="my-reservations-section">
+        <h2>Mis Reservas</h2>
+        <p class="section-info">Gestiona tus reservas activas y pasadas</p>
+        
+        <div class="reservations-list">
+          <!-- Reserva activa -->
+          <div class="reservation-card active-reservation">
+            <div class="reservation-status">
+              <span class="status-badge confirmed">✓ Confirmada</span>
+              <span class="reservation-id">#RES-2024-001</span>
+            </div>
+            <div class="reservation-details">
+              <div class="reservation-room">
+                <div class="room-icon">🛏️</div>
+                <div class="room-info">
+                  <h3>Suite Deluxe</h3>
+                  <p>Reserva confirmada para tu próxima estadía</p>
+                </div>
+              </div>
+              <div class="reservation-data">
+                <div class="data-item">
+                  <span class="data-label">Entrada</span>
+                  <span class="data-value">15 Nov 2024</span>
+                </div>
+                <div class="data-item">
+                  <span class="data-label">Salida</span>
+                  <span class="data-value">18 Nov 2024</span>
+                </div>
+                <div class="data-item">
+                  <span class="data-label">Personas</span>
+                  <span class="data-value">2 adultos</span>
+                </div>
+                <div class="data-item">
+                  <span class="data-label">Total</span>
+                  <span class="data-value highlight">$750,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="reservation-actions">
+              <button class="btn-action btn-details">Ver Detalles</button>
+              <button class="btn-action btn-cancel">Cancelar Reserva</button>
+            </div>
+          </div>
+
+          <!-- Mensaje cuando no hay reservas -->
+          <div class="no-reservations" style="display: none;">
+            <div class="no-reservations-icon">📅</div>
+            <h3>No tienes reservas activas</h3>
+            <p>Cuando realices una reserva, aparecerá aquí</p>
+            <a href="#inicio" class="btn-primary">Explorar Habitaciones</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Página Contacto -->
+  <section id="contacto">
+  <div class="bg-decoration decoration-1"></div>
+    <div class="bg-decoration decoration-2"></div>
+    <div class="bg-decoration decoration-3"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-box">
+                <span>🏨</span>
+            </div>
+            <h1>Hotel el Rincón del Carmen</h1>
+            <p>Estamos aquí para atenderte</p>
+        </header>
+
+        <div class="content">
+            <!-- Dirección principal -->
+            <div class="address-box">
+                <h3><span>📍</span> Nuestra Ubicación</h3>
+                <p>
+                    Calle Principal #123, Barrio El Carmen<br>
+                    Floridablanca, Santander<br>
+                    Colombia
+                </p>
+            </div>
+
+            <!-- Tarjetas de contacto -->
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Teléfono</h3>
+                    <p>Llámanos de lunes a domingo</p>
+                    <a href="tel:+576071234567">+57 607 123 4567</a>
+                    <a href="tel:+573001234567">+57 300 123 4567</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Correo Electrónico</h3>
+                    <p>Escríbenos en cualquier momento</p>
+                    <a href="mailto:info@rincondelcarmen.com">info@rincondelcarmen.com</a>
+                    <a href="mailto:reservas@rincondelcarmen.com">reservas@rincondelcarmen.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Chatea con nosotros</p>
+                    <a href="https://wa.me/573001234567" target="_blank">Enviar mensaje</a>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Respuesta rápida garantizada</p>
+                </div>
+            </div>
+
+            <!-- Horarios de atención -->
+            <div class="schedule-box">
+                <h3>🕒 Horarios de Atención</h3>
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <span class="day">Lunes - Viernes</span>
+                        <span class="hours">7:00 AM - 10:00 PM</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="day">Sábados - Domingos</span>
+                        <span class="hours">8:00 AM - 10:00 PM</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="day">Recepción 24/7</span>
+                        <span class="hours">Siempre disponible</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="map-section">
+                <h2>Encuéntranos en el Mapa</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.0887877891643!2d-73.08623792487853!3d7.097734216602359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e681576c2ab4aeb%3A0x7f8a5b6f9a8e5c3d!2sFloridablanca%2C%20Santander%2C%20Colombia!5e0!3m2!1ses!2sus!4v1696445678901!5m2!1ses!2sus" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="social-section">
+                <h3>Síguenos en Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="#" class="social-btn" title="Facebook">f</a>
+                    <a href="#" class="social-btn" title="Instagram">📷</a>
+                    <a href="#" class="social-btn" title="Twitter">🐦</a>
+                    <a href="#" class="social-btn" title="TikTok">🎵</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+</body>
+</html>
