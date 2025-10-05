@@ -137,3 +137,17 @@ export function addReservation(reservation) {
   reservations.push(reservation);
   saveReservations(reservations);
 }
+
+export function checkRoomAvailability(roomId, fechaEntrada, fechaSalida) {
+  const reservations = getReservations();
+  const entrada = new Date(fechaEntrada);
+  const salida = new Date(fechaSalida);
+
+  return !reservations.some(reservation => {
+    if (reservation.roomId !== roomId) return false;
+    const resEntrada = new Date(reservation.fechaEntrada);
+    const resSalida = new Date(reservation.fechaSalida);
+    // Check overlap: not (salida <= resEntrada or entrada >= resSalida)
+    return !(salida <= resEntrada || entrada >= resSalida);
+  });
+}

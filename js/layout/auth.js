@@ -1,6 +1,7 @@
 // Manejo de la lógica de login y registro usando localStorage
 
 import { getUsers, addUser, findUserByEmail } from './storage.js';
+import { showSection, updateNav } from './navbar.js';
 
 const loginView = document.getElementById('login-view');
 const registerView = document.getElementById('register-view');
@@ -149,19 +150,8 @@ function onLoginSuccess(user) {
   // Guardar usuario en sesión o localStorage para persistencia
   sessionStorage.setItem('currentUser', JSON.stringify(user));
   // Navegar a página de inicio
-  window.location.hash = '#inicio';
-  // Ocultar vista login/registro
-  const loginSection = document.getElementById('login');
-  const inicioSection = document.getElementById('inicio');
-
-  if (loginSection) {
-    loginSection.classList.remove('active');
-    loginSection.style.display = 'none';
-  }
-  if (inicioSection) {
-    inicioSection.classList.add('active');
-    inicioSection.style.display = 'block';
-  }
+  showSection('inicio');
+  updateNav();
 }
 
 // Función para verificar si el usuario está logueado
@@ -169,21 +159,30 @@ export function isUserLoggedIn() {
   return sessionStorage.getItem('currentUser') !== null;
 }
 
+// Función para cerrar sesión
+export function logoutUser() {
+  sessionStorage.removeItem('currentUser');
+  alert('Has cerrado sesión.');
+  showSection('login');
+  updateNav();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutUser();
+    });
+  }
+});
+
 // Función para proteger la página de reservas
 function protectReservationPage() {
   if (!isUserLoggedIn()) {
     alert('Debes iniciar sesión para acceder a las reservas.');
-    window.location.hash = '#login';
-    const loginSection = document.getElementById('login');
-    const inicioSection = document.getElementById('inicio');
-    if (loginSection) {
-      loginSection.classList.add('active');
-      loginSection.style.display = 'block';
-    }
-    if (inicioSection) {
-      inicioSection.classList.remove('active');
-      inicioSection.style.display = 'none';
-    }
+    showSection('login');
+    updateNav();
   }
 }
 

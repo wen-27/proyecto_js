@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn } from '../layout/auth.js';
 import { showSection } from '../layout/navbar.js';
-import { addReservation } from '../layout/storage.js';
+import { addReservation, checkRoomAvailability } from '../layout/storage.js';
 
 let currentRoom = null;
 let currentSearchData = null;
@@ -54,6 +54,14 @@ export function showRoomModal(room, searchData) {
       return;
     }
 
+    // Verificar disponibilidad antes de reservar
+    if (!checkRoomAvailability(room.id, searchData.fechaEntrada, searchData.fechaSalida)) {
+      alert('Lo sentimos, la habitación ya no está disponible para las fechas seleccionadas.');
+      modal.style.display = 'none';
+      return;
+    }
+
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     const reservation = {
       id: Date.now(),
       roomId: room.id,
@@ -61,12 +69,15 @@ export function showRoomModal(room, searchData) {
       fechaSalida: searchData.fechaSalida,
       numPersonas: searchData.numPersonas,
       totalPrice: totalPrice,
-      userEmail: localStorage.getItem('currentUser'), // Asumiendo que se guarda el email del usuario logueado
+      userEmail: currentUser ? currentUser.email : null,
       fechaReserva: new Date().toISOString()
     };
 
     addReservation(reservation);
     alert('Reserva realizada exitosamente!');
     modal.style.display = 'none';
+
+    // Disparar evento para recargar reservas
+    window.dispatchEvent(new CustomEvent('reservationUpdated'));
   });
 }

@@ -31,6 +31,9 @@ function showSection(sectionId) {
 
   // Actualizar URL
   history.pushState(null, '', `#${sectionId}`);
+
+  // Actualizar navegación
+  updateNav();
 }
 
 function handleHashChange() {
@@ -62,5 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
   handleHashChange();
 });
 
+// Función para actualizar navegación basada en estado de login
+function updateNav() {
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    if (isUserLoggedIn()) {
+      logoutLink.style.display = 'inline';
+    } else {
+      logoutLink.style.display = 'none';
+    }
+  }
+}
+
 // Exportar función para uso en otros módulos
-export { showSection };
+export { showSection, updateNav };

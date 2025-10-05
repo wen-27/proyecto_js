@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn } from './auth.js';
 import { showSection } from './navbar.js';
-import { getRooms } from './storage.js';
+import { getRooms, getReservations, saveReservations, checkRoomAvailability } from './storage.js';
 import { showRoomModal } from '../components/modalReserva.js';
 
 function getServiceIcon(service) {
@@ -19,7 +19,95 @@ function getServiceIcon(service) {
   return icons[service] || '✅';
 }
 
+function loadReservations() {
+  const reservations = getReservations();
+  const reservationsList = document.querySelector('.reservations-list');
+  reservationsList.innerHTML = '';
+
+  if (reservations.length === 0) {
+    reservationsList.innerHTML = `
+      <div class="no-reservations">
+        <div class="no-reservations-icon">📅</div>
+        <h3>No tienes reservas activas</h3>
+        <p>¡Haz tu primera reserva ahora!</p>
+      </div>
+    `;
+    return;
+  }
+
+  reservations.forEach(reservation => {
+    const room = getRooms().find(r => r.id === reservation.roomId);
+    if (!room) return;
+
+    const reservationCard = document.createElement('div');
+    reservationCard.className = 'reservation-card active-reservation';
+    reservationCard.innerHTML = `
+      <div class="reservation-status">
+        <div class="status-badge confirmed">Confirmada</div>
+        <div class="reservation-id">ID: ${reservation.id}</div>
+      </div>
+      <div class="reservation-details">
+        <div class="reservation-room">
+          <div class="room-icon">🛏️</div>
+          <div class="room-info">
+            <h3>${room.name}</h3>
+            <p>${room.description}</p>
+          </div>
+        </div>
+        <div class="reservation-data">
+          <div class="data-item">
+            <div class="data-label">Fecha de entrada</div>
+            <div class="data-value">${reservation.fechaEntrada}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Fecha de salida</div>
+            <div class="data-value">${reservation.fechaSalida}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Personas</div>
+            <div class="data-value">${reservation.numPersonas}</div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Precio total</div>
+            <div class="data-value highlight">$${reservation.totalPrice.toLocaleString()}</div>
+          </div>
+        </div>
+      </div>
+      <div class="reservation-actions">
+        <button class="btn-action btn-details" data-reservation-id="${reservation.id}">Ver Detalles</button>
+        <button class="btn-action btn-cancel" data-reservation-id="${reservation.id}">Cancelar Reserva</button>
+      </div>
+    `;
+    reservationsList.appendChild(reservationCard);
+  });
+
+  // Agregar event listeners para cancelar
+  document.querySelectorAll('.btn-cancel').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const reservationId = parseInt(e.target.dataset.reservationId);
+      if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
+        cancelReservation(reservationId);
+      }
+    });
+  });
+}
+
+function cancelReservation(reservationId) {
+  let reservations = getReservations();
+  reservations = reservations.filter(r => r.id !== reservationId);
+  saveReservations(reservations);
+  loadReservations(); // Recargar la lista
+  alert('Reserva cancelada exitosamente.');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  loadReservations(); // Cargar reservas al inicio
+
+  // Escuchar actualizaciones de reservas
+  window.addEventListener('reservationUpdated', () => {
+    loadReservations();
+  });
+
   // Manejar clics en botones de reservar
   document.querySelectorAll('.btn-reserve, .reserve-button').forEach(button => {
     button.addEventListener('click', (e) => {
@@ -59,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const rooms = getRooms();
-      const availableRooms = rooms.filter(room => room.capacity >= numPersonas && room.available);
+      const availableRooms = rooms.filter(room => room.capacity >= numPersonas && room.available && checkRoomAvailability(room.id, fechaEntrada, fechaSalida));
 
       const roomsGrid = document.querySelector('.rooms-grid');
       roomsGrid.innerHTML = '';
