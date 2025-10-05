@@ -4,20 +4,9 @@ import { isUserLoggedIn } from './auth.js';
 import { showSection } from './navbar.js';
 import { getRooms, getReservations, saveReservations, checkRoomAvailability } from './storage.js';
 import { showRoomModal } from '../components/modalReserva.js';
+import { createRoomCard } from '../components/cardRoom.js';
 
-function getServiceIcon(service) {
-  const icons = {
-    'WiFi': '📶',
-    'Minibar': '🍷',
-    'Jacuzzi': '🛁',
-    'Vista panorámica': '🏞️',
-    'Cafetera': '☕',
-    'Escritorio': '💼',
-    'Área de juegos': '🎮',
-    'Cocina': '🍳'
-  };
-  return icons[service] || '✅';
-}
+
 
 function loadReservations() {
   const reservations = getReservations();
@@ -160,25 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const numNights = Math.ceil((salida - entrada) / (1000 * 60 * 60 * 24));
 
       availableRooms.forEach(room => {
-        const totalPrice = room.pricePerNight * numNights;
-        const roomCard = document.createElement('div');
-        roomCard.className = 'room-result-card';
-        roomCard.innerHTML = `
-          <div class="room-result-image">
-            <img src="${room.image}" alt="${room.name}" style="width: 100%; height: 150px; object-fit: cover;">
-          </div>
-          <div class="room-result-content">
-            <h3>${room.name}</h3>
-            <p>${room.description}</p>
-            <div class="room-features">
-              <span>👥 ${room.capacity} personas</span>
-              <span>🛏️ ${room.beds} camas</span>
-              ${room.services.map(service => `<span>${getServiceIcon(service)} ${service}</span>`).join('')}
-            </div>
-            <div class="room-price">$${totalPrice.toLocaleString()} <span>total (${numNights} noches)</span></div>
-            <button class="btn-details" data-room-id="${room.id}">Ver Detalles</button>
-          </div>
-        `;
+        const roomCard = createRoomCard(room, numNights);
         roomsGrid.appendChild(roomCard);
       });
 
