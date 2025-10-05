@@ -1,3 +1,21 @@
+/* ========= 🔹 FIX PARA NAVEGACIÓN ========= */
+
+/* Ocultar secciones por defecto */
+section {
+  display: none;
+  padding: 80px 30px 30px;
+}
+
+/* Mostrar solo la sección activa */
+section.active {
+  display: block;
+}
+
+/* Fix específico para login */
+#login.active {
+  display: flex;
+  padding: 20px;
+}
 /* ========= 🔹 ESTILOS GENERALES (para nav y secciones) ========= */
 
 /* Estilos básicos del cuerpo de la página */
