@@ -74,8 +74,48 @@ export function findUserByEmail(email) {
 
 // Habitaciones
 export function getRooms() {
-  const rooms = localStorage.getItem(STORAGE_KEYS.ROOMS);
-  return rooms ? JSON.parse(rooms) : [];
+  let rooms = localStorage.getItem(STORAGE_KEYS.ROOMS);
+  if (!rooms) {
+    // Crear habitaciones de muestra si no existen
+    const defaultRooms = [
+      {
+        id: 1,
+        name: 'Suite Deluxe',
+        capacity: 4,
+        beds: 2,
+        services: ['WiFi', 'Minibar', 'Jacuzzi', 'Vista panorámica'],
+        pricePerNight: 250000,
+        image: 'img/Hotel La Semilla - Playa del Carmen, Mexico _.jpeg',
+        description: 'Espaciosa suite con vista panorámica, jacuzzi privado y todas las comodidades de lujo.',
+        available: true
+      },
+      {
+        id: 2,
+        name: 'Habitación Ejecutiva',
+        capacity: 2,
+        beds: 1,
+        services: ['WiFi', 'Cafetera', 'Escritorio'],
+        pricePerNight: 180000,
+        image: 'img/Chic 2bdr Ground Floor at El Faro Coral 101!.jpeg',
+        description: 'Perfecta para viajes de negocios o parejas, con escritorio y zona de trabajo.',
+        available: true
+      },
+      {
+        id: 3,
+        name: 'Habitación Familiar',
+        capacity: 6,
+        beds: 3,
+        services: ['WiFi', 'Área de juegos', 'Cocina'],
+        pricePerNight: 320000,
+        image: 'img/salas/familiar.png',
+        description: 'Amplio espacio para toda la familia con dos habitaciones conectadas.',
+        available: true
+      }
+    ];
+    localStorage.setItem(STORAGE_KEYS.ROOMS, JSON.stringify(defaultRooms));
+    rooms = JSON.stringify(defaultRooms);
+  }
+  return JSON.parse(rooms);
 }
 
 export function saveRooms(rooms) {
@@ -90,4 +130,10 @@ export function getReservations() {
 
 export function saveReservations(reservations) {
   localStorage.setItem(STORAGE_KEYS.RESERVATIONS, JSON.stringify(reservations));
+}
+
+export function addReservation(reservation) {
+  const reservations = getReservations();
+  reservations.push(reservation);
+  saveReservations(reservations);
 }
