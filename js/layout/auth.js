@@ -165,7 +165,7 @@ function onLoginSuccess(user) {
 }
 
 // Función para verificar si el usuario está logueado
-function isUserLoggedIn() {
+export function isUserLoggedIn() {
   return sessionStorage.getItem('currentUser') !== null;
 }
 

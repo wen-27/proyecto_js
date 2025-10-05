@@ -1,2 +1,3 @@
 import './layout/auth.js';
-import './components/narvar.js'
+import './layout/navbar.js';
+import './layout/reservas.js';
