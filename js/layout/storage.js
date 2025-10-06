@@ -151,3 +151,9 @@ export function checkRoomAvailability(roomId, fechaEntrada, fechaSalida) {
     return !(salida <= resEntrada || entrada >= resSalida);
   });
 }
+
+// Usuario actual
+export function getCurrentUser() {
+  const user = sessionStorage.getItem('currentUser');
+  return user ? JSON.parse(user) : null;
+}

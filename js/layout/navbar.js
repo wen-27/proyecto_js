@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn } from './auth.js';
 
-const sections = ['login', 'inicio', 'reservas', 'contacto'];
+const sections = ['login', 'inicio', 'reservas', 'contacto', 'admin'];
 
 function showSection(sectionId) {
   // Ocultar todas las secciones
@@ -66,13 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Función para actualizar navegación basada en estado de login
+import { getCurrentUser } from './storage.js';
+
 function updateNav() {
   const logoutLink = document.getElementById('logout-link');
+  const adminLink = document.querySelector('a[href="#admin"]');
+  const currentUser = getCurrentUser();
+
   if (logoutLink) {
     if (isUserLoggedIn()) {
       logoutLink.style.display = 'inline';
     } else {
       logoutLink.style.display = 'none';
+    }
+  }
+
+  if (adminLink) {
+    if (currentUser && currentUser.role === 'admin') {
+      adminLink.style.display = 'inline';
+    } else {
+      adminLink.style.display = 'none';
     }
   }
 }
