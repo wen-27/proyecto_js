@@ -1,6 +1,21 @@
-// Componente para mostrar habitaciones disponibles en una tabla
+// roomsTable.js
+import { getRooms } from './storage.js';
 
-export function createRoomsTable(rooms, numNights = 1) {
+// Función para obtener habitaciones con rutas de imagen normalizadas
+function getRoomsWithImages() {
+  const rooms = getRooms();
+  return rooms.map(room => {
+    let imgPath = room.image.trim(); // Limpiar espacios invisibles
+    if (!imgPath.startsWith('./') && !imgPath.startsWith('http')) {
+      imgPath = `./${imgPath}`; // Asegurar que sea relativa al HTML
+    }
+    return { ...room, image: imgPath };
+  });
+}
+
+// Componente para crear tabla de habitaciones
+export function createRoomsTable(numNights = 1) {
+  const rooms = getRoomsWithImages(); // rutas ya normalizadas
   const table = document.createElement('table');
   table.className = 'rooms-table';
 
@@ -24,18 +39,25 @@ export function createRoomsTable(rooms, numNights = 1) {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-      <td><img src="${room.image}" alt="${room.name}" style="width: 100px; height: 60px; object-fit: cover;"></td>
+      <td>
+        <img src="${room.image}" 
+             alt="${room.name}" 
+             style="width: 100px; height: 60px; object-fit: cover;"
+             onerror="this.src='./img/salas/fallback.png'">
+      </td>
       <td>${room.name}</td>
       <td>${room.capacity} personas</td>
       <td>${room.services.join(', ')}</td>
       <td>$${totalPrice.toLocaleString()} (${numNights} noches)</td>
-      <td><button class="btn-details" data-room-id="${room.id}">Ver Detalles</button></td>
+      <td>
+        <button class="btn-details" data-room-id="${room.id}">Ver Detalles</button>
+      </td>
     `;
 
     tbody.appendChild(row);
   });
 
   table.appendChild(tbody);
-
   return table;
 }
+

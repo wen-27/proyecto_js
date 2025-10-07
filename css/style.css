@@ -564,19 +564,19 @@ input[type="radio"] {
 @keyframes cambioFondo {
   0% {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
-      url("../img/Chic\ 2bdr\ Ground\ Floor\ at\ El\ Faro\ Coral\ 101!.jpeg"); /* Primera imagen */
+      url("../img/salas/Hotel\ La\ Semilla\ -\ Playa\ del\ Carmen\,\ Mexico\ _.jpeg"); /* Primera imagen */
   }
   33% {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
-      url("../img/Hotel\ La\ Semilla\ -\ Playa\ del\ Carmen\,\ Mexico\ _.jpeg"); /* Segunda imagen */
+      url("../img/salas/Chic\ 2bdr\ Ground\ Floor\ at\ El\ Faro\ Coral\ 101!.jpeg"); /* Segunda imagen */
   }
   66% {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
-      url("../img/_.jpeg"); /* Tercera imagen */
+      url("../img/salas/_.jpeg"); /* Tercera imagen */
   }
   100% {
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Overlay */
-      url("../img/_.jjpeg.jpeg"); /* Cuarta imagen */
+      url("../img/salas/_.jjpeg.jpeg"); /* Cuarta imagen */
   }
 }
 
