@@ -52,6 +52,7 @@ function renderRoomManagementUI() {
 }
 
 // Renderizar tabla de habitaciones
+// Renderizar tabla de habitaciones
 function renderRoomsTable() {
   const container = document.getElementById('rooms-table-container');
   if (!container) return;
@@ -94,7 +95,7 @@ function renderRoomsTable() {
   container.innerHTML = '';
   container.appendChild(table);
 
-  // Event listeners para botones de editar y eliminar
+  // 🟡 Botones de editar
   table.querySelectorAll('.btn-edit').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const roomId = parseInt(e.target.dataset.roomId);
@@ -103,15 +104,44 @@ function renderRoomsTable() {
     });
   });
 
+  // 🔴 Botones de eliminar con SweetAlert2
   table.querySelectorAll('.btn-delete').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const roomId = parseInt(e.target.dataset.roomId);
-      if (confirm('¿Está seguro de que desea eliminar esta habitación?')) {
-        deleteRoom(roomId);
-      }
+      const row = e.target.closest('tr');
+
+      Swal.fire({
+        title: "¿Eliminar habitación?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteRoom(roomId);
+
+          // Animación de eliminación visual
+          row.style.transition = "all 0.4s ease";
+          row.style.opacity = "0";
+          row.style.transform = "translateX(-10px)";
+          setTimeout(() => row.remove(), 400);
+
+          Swal.fire({
+            title: "Eliminada ✅",
+            text: "La habitación fue eliminada correctamente.",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: "#3085d6"
+          });
+        }
+      });
     });
   });
 }
+
 
 // Mostrar formulario para agregar/editar habitación
 function showRoomForm(room = null) {

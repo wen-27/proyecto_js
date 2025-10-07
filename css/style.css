@@ -870,7 +870,7 @@ input[type="radio"] {
 
 .area3 {
   background-image: 
-    url('../img/_.jpeg');
+    url('../img/salas/_.jpeg');
 }
 
 .area4 {
@@ -880,7 +880,7 @@ input[type="radio"] {
 
 .area5 {
   background-image: 
-    url('../img/_.jjpeg.jpeg');
+    url('../img/salas/_.jjpeg.jpeg');
 }
 
 .area6 {
@@ -970,310 +970,223 @@ input[type="radio"] {
 
 /* ========= 🔹 ESTILOS CONTACTO ========= */
 
-/* Decoraciones de fondo animadas para página de contacto */
-.bg-decoration {
-  position: fixed; /* Posición fija */
-  border-radius: 50%; /* Circular */
-  filter: blur(60px); /* Desenfoque */
-  opacity: 0.3; /* Opacidad baja */
-  animation: float 6s ease-in-out infinite; /* Animación flotante */
-  z-index: 0; /* Z-index bajo */
-}
-
-/* Primera decoración */
-.decoration-1 {
-  width: 300px; /* Ancho */
-  height: 300px; /* Alto */
-  background: #fbbf24; /* Color amarillo */
-  top: 10%; /* Posición arriba */
-  left: 5%; /* Posición izquierda */
-}
-
-/* Segunda decoración */
-.decoration-2 {
-  width: 300px; /* Ancho */
-  height: 300px; /* Alto */
-  background: #fb923c; /* Color naranja */
-  top: 20%; /* Posición arriba */
-  right: 5%; /* Posición derecha */
-  animation-delay: 1s; /* Retraso */
-}
-
-/* Tercera decoración */
-.decoration-3 {
-  width: 300px; /* Ancho */
-  height: 300px; /* Alto */
-  background: #f97316; /* Color naranja oscuro */
-  bottom: 10%; /* Posición abajo */
-  left: 30%; /* Posición izquierda */
-  animation-delay: 2s; /* Retraso */
-}
-
-/* Animación de flotación */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); } /* Posición inicial/final */
-  50% { transform: translateY(-20px); } /* Mitad */
-}
-
-
-/* Header de contacto */
-header {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  color: white;
-  padding: 4rem 5vw; /* padding horizontal relativo al ancho de pantalla */
+/* === SECCIÓN CONTACTO CON GRID DEFINIDO === */
+#contacto {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "ubicacion"
+    "telefono"
+    "email"
+    "whatsapp"
+    "mapa";
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: #fffaf5;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
   text-align: center;
-  margin: 0 auto;
-  max-width: 100%;
-  box-sizing: border-box;
-  font-size: 2rem; /* tamaño base para desktop */
 }
 
-/* Caja del logo en header */
-.logo-box {
-  display: inline-block; /* Bloque en línea */
-  background: white; /* Fondo blanco */
-  padding: 1.5rem; /* Relleno */
-  border-radius: 1.5rem; /* Bordes redondeados */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra */
-  margin-bottom: 1rem; /* Margen inferior */
+/* === HEADER === */
+#contacto header {
+  grid-area: header;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 3rem; /* 👈 separa visualmente el header del resto */
 }
 
-/* Ícono del logo */
-.logo-box span {
-  font-size: 3rem; /* Tamaño grande */
+#contacto header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Título del header */
-header h1 {
-  font-size: 2.5rem; /* Tamaño grande */
-  margin-bottom: 0.5rem; /* Margen inferior */
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra de texto */
+#contacto header p {
+  font-size: 1.2rem;
+  opacity: 0.95;
 }
 
-/* Subtítulo del header */
-header p {
-  font-size: 1.2rem; /* Tamaño mediano */
-  opacity: 0.95; /* Opacidad */
-}
-
-/* Contenido principal */
-.content {
-  padding: 3rem 2rem; /* Relleno */
-}
-
-/* Caja de dirección */
-.address-box {
-  background: linear-gradient(135deg, #fffbeb, #fef3c7); /* Gradiente */
-  padding: 2rem; /* Relleno */
-  border-radius: 1rem; /* Bordes redondeados */
-  margin-bottom: 3rem; /* Margen inferior */
-  text-align: center; /* Centrar texto */
-  border: 2px solid #fbbf24; /* Borde amarillo */
-}
-
-/* Título de dirección */
-.address-box h3 {
-  font-size: 1.8rem; /* Tamaño grande */
-  color: #1f2937; /* Color gris oscuro */
-  margin-bottom: 1rem; /* Margen inferior */
-  display: flex; /* Flexbox */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  gap: 0.5rem; /* Espacio */
-}
-
-/* Texto de dirección */
-.address-box p {
-  font-size: 1.1rem; /* Tamaño mediano */
-  color: #6b7280; /* Color gris */
-  line-height: 1.8; /* Altura de línea */
-}
-
-/* Grid de contacto */
-.contact-grid {
-  display: grid; /* CSS Grid */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
-  gap: 2rem; /* Espacio */
-  margin-bottom: 3rem; /* Margen inferior */
-}
-
-/* Tarjeta de contacto */
-.contact-card {
-  background: white; /* Fondo blanco */
-  padding: 2rem; /* Relleno */
-  border-radius: 1rem; /* Bordes redondeados */
-  text-align: center; /* Centrar texto */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
-}
-
-/* Hover en tarjeta de contacto */
-.contact-card:hover {
-  transform: translateY(-5px); /* Mover arriba */
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15); /* Sombra más grande */
-}
-
-/* Ícono de contacto */
-.contact-icon {
-  width: 70px; /* Ancho */
-  height: 70px; /* Alto */
-  background: linear-gradient(135deg, #f59e0b, #f97316); /* Gradiente */
-  border-radius: 50%; /* Circular */
-  display: flex; /* Flexbox */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  margin: 0 auto 1.5rem; /* Margen inferior */
-  font-size: 2rem; /* Tamaño de ícono */
-  color: white; /* Color blanco */
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); /* Sombra */
-}
-
-/* Título de tarjeta de contacto */
-.contact-card h3 {
-  color: #1f2937; /* Color gris oscuro */
-  margin-bottom: 1rem; /* Margen inferior */
-  font-size: 1.4rem; /* Tamaño mediano */
-}
-
-/* Descripción de contacto */
-.contact-card p {
-  color: #6b7280; /* Color gris */
-  margin-bottom: 1rem; /* Margen inferior */
-  font-size: 0.95rem; /* Tamaño pequeño */
-}
-
-/* Enlaces de contacto */
-.contact-card a {
-  color: #f59e0b; /* Color naranja */
-  text-decoration: none; /* Sin subrayado */
-  font-weight: 600; /* Negrita */
-  transition: color 0.3s ease; /* Transición en color */
-  display: block; /* Bloque */
-  margin-bottom: 0.5rem; /* Margen inferior */
-}
-
-/* Hover en enlaces */
-.contact-card a:hover {
-  color: #f97316; /* Color naranja oscuro */
-}
-
-/* Sección del mapa */
+/* === TARJETAS DE INFORMACIÓN (GENERAL) === */
+.address-box,
+.contact-card,
 .map-section {
-  margin-top: 3rem; /* Margen superior */
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Título de sección de mapa */
-.map-section h2 {
-  text-align: center; /* Centrar */
-  color: #1f2937; /* Color gris oscuro */
-  font-size: 2rem; /* Tamaño grande */
-  margin-bottom: 2rem; /* Margen inferior */
+.address-box:hover,
+.contact-card:hover,
+.map-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-/* Contenedor del mapa */
-.map-container {
-  width: 100%; /* Ancho completo */
-  height: 450px; /* Altura */
-  border-radius: 1rem; /* Bordes redondeados */
-  overflow: hidden; /* Ocultar desbordamiento */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra */
-  border: 3px solid #fbbf24; /* Borde amarillo */
+/* === ASIGNACIÓN DE ÁREAS EN GRID === */
+.address-box { grid-area: ubicacion; }
+.contact-card:nth-of-type(1) { grid-area: telefono; }
+.contact-card:nth-of-type(2) { grid-area: email; }
+.contact-card:nth-of-type(3) { grid-area: whatsapp; }
+.map-section { grid-area: mapa; }
+
+/* === TÍTULOS DE CADA BLOQUE === */
+.address-box h3,
+.contact-card h3 {
+  font-size: 2rem;
+  color: #c76b39;
+  margin-bottom: 0.8rem;
 }
 
-/* Iframe del mapa */
-.map-container iframe {
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Altura completa */
-  border: none; /* Sin borde */
+/* === TEXTOS === */
+.address-box p,
+.contact-card p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
 }
 
-/* Sección de redes sociales */
-.social-section {
-  margin-top: 3rem; /* Margen superior */
-  text-align: center; /* Centrar */
+/* === ENLACES (TELÉFONO, EMAIL, WHATSAPP) === */
+.contact-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #0d0c0c;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Título de redes sociales */
-.social-section h3 {
-  color: #1f2937; /* Color gris oscuro */
-  font-size: 1.5rem; /* Tamaño mediano */
-  margin-bottom: 1.5rem; /* Margen inferior */
+.contact-card a:hover {
+  color: #9f5125;
+  transform: translateX(3px);
 }
 
-/* Enlaces de redes sociales */
-.social-links {
-  display: flex; /* Flexbox */
-  justify-content: center; /* Centrar */
-  gap: 1.5rem; /* Espacio */
-  flex-wrap: wrap; /* Envolver */
+/* === ICONOS === */
+.contact-icon {
+  font-size: 2rem;
+  color: #c76b39;
+  margin-bottom: 1rem;
 }
 
-/* Botón de red social */
-.social-btn {
-  width: 60px; /* Ancho */
-  height: 60px; /* Alto */
-  background: linear-gradient(135deg, #f59e0b, #f97316); /* Gradiente */
-  border-radius: 50%; /* Circular */
-  display: flex; /* Flexbox */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  color: white; /* Color blanco */
-  text-decoration: none; /* Sin subrayado */
-  font-size: 1.5rem; /* Tamaño de ícono */
-  transition: all 0.3s ease; /* Transición suave */
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); /* Sombra */
+.contact-card a i {
+  font-size: 2rem;
 }
 
-/* Hover en botón de red social */
-.social-btn:hover {
-  transform: scale(1.1) translateY(-3px); /* Escalar y mover arriba */
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); /* Sombra más grande */
+/* === MAPA === */
+.map-section iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 0.8rem;
 }
 
-/* Caja de horarios */
-.schedule-box {
-  background: white; /* Fondo blanco */
-  padding: 2rem; /* Relleno */
-  border-radius: 1rem; /* Bordes redondeados */
-  margin-top: 3rem; /* Margen superior */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
+/* === SEPARACIÓN ENTRE BLOQUES === */
+#contacto .address-box,
+#contacto .contact-card,
+#contacto .map-section {
+  margin-bottom: 3rem;
 }
 
-/* Título de horarios */
-.schedule-box h3 {
-  color: #1f2937; /* Color gris oscuro */
-  font-size: 1.5rem; /* Tamaño mediano */
-  margin-bottom: 1.5rem; /* Margen inferior */
-  text-align: center; /* Centrar */
+.map-section {
+  margin-top: 1rem;
 }
 
-/* Grid de horarios */
-.schedule-grid {
-  display: grid; /* CSS Grid */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
-  gap: 1.5rem; /* Espacio */
+/* === RESPONSIVE PARA ESCRITORIO === */
+@media (min-width: 900px) {
+  #contacto {
+    grid-template-areas:
+      "header header header"
+      "ubicacion telefono email"
+      "whatsapp whatsapp mapa";
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.8rem;
+    padding: 5rem 7rem;
+  }
+
+  #contacto header {
+    margin-bottom: 5rem; /* 👈 aún más separación en escritorio */
+  }
+
+  #contacto h2 {
+    font-size: 2.8rem;
+  }
+
+  #contacto .address-box,
+  #contacto .contact-card,
+  #contacto .map-section {
+    margin-bottom: 4rem;
+  }
+
+  .map-section iframe {
+    height: 380px;
+  }
 }
 
-/* Item de horario */
-.schedule-item {
-  display: flex; /* Flexbox */
-  justify-content: space-between; /* Espacio entre */
-  padding: 1rem; /* Relleno */
-  background: #fffbeb; /* Fondo amarillo claro */
-  border-radius: 0.75rem; /* Bordes redondeados */
-  border-left: 4px solid #f59e0b; /* Borde izquierdo naranja */
+/* === DECORATIVOS DE FONDO === */
+#contacto::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 220px;
+  height: 220px;
+  background: rgba(199, 107, 57, 0.05);
+  border-radius: 50%;
+  z-index: 0;
 }
 
-/* Día del horario */
-.schedule-item .day {
-  color: #1f2937; /* Color gris oscuro */
-  font-weight: 600; /* Negrita */
+#contacto::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  background: rgba(199, 107, 57, 0.07);
+  border-radius: 50%;
+  z-index: 0;
 }
 
-/* Horas del horario */
-.schedule-item .hours {
-  color: #6b7280; /* Color gris */
+/* === CONTENIDO SIEMPRE ENCIMA === */
+#contacto * {
+  position: relative;
+  z-index: 1;
 }
+
+/* === ANIMACIÓN SUAVE === */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#contacto .address-box,
+#contacto .contact-card,
+#contacto .map-section {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+#contacto .contact-card:nth-of-type(1) { animation-delay: 0.1s; }
+#contacto .contact-card:nth-of-type(2) { animation-delay: 0.2s; }
+#contacto .contact-card:nth-of-type(3) { animation-delay: 0.3s; }
+#contacto .map-section { animation-delay: 0.4s; }
+
 /* ========= 🔹 ESTILOS PÁGINA RESERVAS ========= */
 .reservas-container {
   max-width: 1200px;

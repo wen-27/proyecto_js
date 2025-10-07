@@ -70,16 +70,54 @@ function loadReservations() {
     reservationsList.appendChild(reservationCard);
   });
 
-  // Agregar event listeners para cancelar
+  // Confirmación con SweetAlert2 💫
   document.querySelectorAll('.btn-cancel').forEach(button => {
     button.addEventListener('click', (e) => {
       const reservationId = parseInt(e.target.dataset.reservationId);
-      if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
-        cancelReservation(reservationId);
-      }
+      const card = e.target.closest('.reservation-card');
+
+      Swal.fire({
+        title: "¿Estás segura?",
+        text: "Esta acción cancelará tu reserva y no podrás revertirla.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, cancelar",
+        cancelButtonText: "No, volver"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          cancelReservation(reservationId);
+          // ✨ Animación de eliminación visual
+          card.style.transition = "all 0.5s ease";
+          card.style.opacity = "0";
+          card.style.transform = "translateY(-10px)";
+          setTimeout(() => {
+            card.remove();
+            if (document.querySelectorAll('.reservation-card').length === 0) {
+              reservationsList.innerHTML = `
+                <div class="no-reservations">
+                  <div class="no-reservations-icon">📅</div>
+                  <h3>No tienes reservas activas</h3>
+                  <p>¡Haz tu primera reserva ahora!</p>
+                </div>
+              `;
+            }
+          }, 400);
+
+          Swal.fire({
+            title: 'Reserva cancelada 🗑️',
+            text: 'Tu reserva ha sido eliminada exitosamente.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
     });
   });
 }
+
 
 function cancelReservation(reservationId) {
   let reservations = getReservations();
