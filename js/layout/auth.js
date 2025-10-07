@@ -62,39 +62,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loginUser(email, password, userType) {
   let users = getUsers();
+
   if (!users || users.length === 0) {
-    alert('No hay usuarios registrados');
+    Swal.fire({
+      title: 'Sin usuarios registrados',
+      text: 'No hay usuarios registrados en el sistema.',
+      icon: 'info',
+      confirmButtonText: 'Entendido'
+    });
     return false;
   }
+
   const user = users.find(u => u.email === email);
   if (!user) {
-    alert('Usuario no registrado');
+    Swal.fire({
+      title: 'Usuario no encontrado',
+      text: 'El correo electrónico ingresado no está registrado.',
+      icon: 'error',
+      confirmButtonText: 'Reintentar'
+    });
     return false;
   }
+
   if (user.password !== password) {
-    alert('Contraseña incorrecta');
+    Swal.fire({
+      title: 'Contraseña incorrecta',
+      text: 'Verifica que la contraseña sea correcta.',
+      icon: 'error',
+      confirmButtonText: 'Intentar de nuevo'
+    });
     return false;
   }
+
   if (userType === 'usuario' && user.role !== 'usuario') {
-    alert('No tienes permisos para acceder como usuario');
+    Swal.fire({
+      title: 'Acceso denegado',
+      text: 'No tienes permisos para acceder como usuario.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    });
     return false;
   }
+
   if (userType === 'admin' && user.role !== 'admin') {
-    alert('No tienes permisos para acceder como administrador');
+    Swal.fire({
+      title: 'Acceso denegado',
+      text: 'No tienes permisos para acceder como administrador.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    });
     return false;
   }
-  alert(`Bienvenido ${user.nombreCompleto}`);
-  onLoginSuccess(user);
+
+  Swal.fire({
+    title: `¡Bienvenido, ${user.nombreCompleto}!`,
+    icon: 'success',
+    showConfirmButton: false,
+    timer: 1800
+  }).then(() => {
+    onLoginSuccess(user);
+  });
+
   return true;
 }
 
+
 // Registrar nuevo usuario
 function registerUser(data) {
-  const { identificacion, nombreCompleto, nacionalidad, email, telefono, password } = data;
-  if (findUserByEmail(email)) {
-    alert('El correo ya está registrado');
-    return false;
-  }
+
+const { identificacion, nombreCompleto, nacionalidad, email, telefono, password } = data;
+
+if (findUserByEmail(email)) {
+  Swal.fire({
+    title: 'Correo ya registrado',
+    text: 'El correo electrónico ingresado ya está asociado a otra cuenta.',
+    icon: 'warning',
+    confirmButtonText: 'Entendido'
+  });
+  return false;
+}
   const newUser = {
     identificacion,
     nombreCompleto,
@@ -108,13 +154,27 @@ function registerUser(data) {
   // Confirmar que el usuario fue agregado correctamente
   const users = getUsers();
   const addedUser = users.find(u => u.email === email);
-  if (!addedUser) {
-    alert('Error al registrar el usuario. Intenta nuevamente.');
-    return false;
-  }
-  alert('Registro exitoso, ya puedes iniciar sesión');
-  // showView('login'); // Removido para evitar conflicto con el control externo
-  return true;
+if (!addedUser) {
+  Swal.fire({
+    title: 'Error al registrar el usuario 😢',
+    text: 'Ocurrió un problema durante el registro. Intenta nuevamente.',
+    icon: 'error',
+    confirmButtonText: 'Reintentar'
+  });
+  return false;
+}
+
+Swal.fire({
+  title: '¡Registro exitoso! 🎉',
+  text: 'Tu cuenta fue creada correctamente. Ya puedes iniciar sesión.',
+  icon: 'success',
+  confirmButtonText: 'Ir a iniciar sesión'
+}).then(() => {
+
+});
+
+return true;
+
 }
 
 // Eventos para cambiar entre login y registro
@@ -162,9 +222,17 @@ export function isUserLoggedIn() {
 // Función para cerrar sesión
 export function logoutUser() {
   sessionStorage.removeItem('currentUser');
-  alert('Has cerrado sesión.');
-  showSection('login');
-  updateNav();
+
+  Swal.fire({
+    title: 'Sesión cerrada correctamente 👋',
+    text: 'Has cerrado sesión. ¡Vuelve pronto!',
+    icon: 'info',
+    showConfirmButton: false,
+    timer: 2000
+  }).then(() => {
+    showSection('login');
+    updateNav();
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -180,24 +248,37 @@ document.addEventListener('DOMContentLoaded', () => {
 // Función para proteger la página de reservas
 function protectReservationPage() {
   if (!isUserLoggedIn()) {
-    alert('Debes iniciar sesión para acceder a las reservas.');
-    showSection('login');
-    updateNav();
+    Swal.fire({
+      title: 'Acceso restringido 🚪',
+      text: 'Debes iniciar sesión para acceder a las reservas.',
+      icon: 'warning',
+      confirmButtonText: 'Iniciar sesión'
+    }).then(() => {
+      showSection('login');
+      updateNav();
+    });
   }
 }
 
-
-
 loginSubmitBtn.addEventListener('click', e => {
   e.preventDefault();
+
   const email = loginEmailInput.value.trim();
   const password = loginPasswordInput.value.trim();
   const userType = userTypeUsuario.checked ? 'usuario' : 'admin';
+
   if (!email || !password) {
-    alert('Por favor completa todos los campos');
+    Swal.fire({
+      title: 'Campos incompletos ',
+      text: 'Por favor, completa todos los campos antes de continuar.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    });
     return;
   }
+
   const success = loginUser(email, password, userType);
+
   if (success) {
     const user = findUserByEmail(email);
     onLoginSuccess(user);
@@ -207,6 +288,7 @@ loginSubmitBtn.addEventListener('click', e => {
 // Evento registro
 registerSubmitBtn.addEventListener('click', e => {
   e.preventDefault();
+
   const data = {};
   const inputs = registerView.querySelectorAll('input');
   data.identificacion = inputs[0].value.trim();
@@ -217,8 +299,15 @@ registerSubmitBtn.addEventListener('click', e => {
   data.password = inputs[5].value.trim();
 
   if (Object.values(data).some(v => !v)) {
-    alert('Por favor completa todos los campos');
+    Swal.fire({
+      title: 'Campos incompletos',
+      text: 'Por favor, completa todos los campos antes de continuar con el registro.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    });
     return;
   }
+
   registerUser(data);
 });
+

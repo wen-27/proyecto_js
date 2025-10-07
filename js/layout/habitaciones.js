@@ -63,6 +63,7 @@ function renderRoomsTable() {
     <thead>
       <tr>
         <th>ID</th>
+        <th>Ubicación</th>
         <th>Nombre</th>
         <th>Camas</th>
         <th>Capacidad</th>
@@ -75,6 +76,7 @@ function renderRoomsTable() {
       ${rooms.map(room => `
         <tr>
           <td>${room.id}</td>
+          <td>${room.location}</td>
           <td>${room.name}</td>
           <td>${room.beds}</td>
           <td>${room.capacity}</td>
@@ -142,6 +144,7 @@ function hideRoomForm() {
 // Guardar habitación (agregar o actualizar)
 function saveRoom(roomData) {
   const existingIndex = rooms.findIndex(r => r.id === roomData.id);
+
   if (existingIndex >= 0) {
     // Actualizar habitación existente
     rooms[existingIndex] = roomData;
@@ -154,13 +157,26 @@ function saveRoom(roomData) {
   loadRooms(); // Recargar para asegurar consistencia
   renderRoomsTable();
   hideRoomForm();
-  alert('Habitación guardada exitosamente');
+
+  Swal.fire({
+    title: '¡Habitación guardada exitosamente! 🏨',
+    text: 'Los cambios han sido registrados correctamente.',
+    icon: 'success',
+    confirmButtonText: 'Aceptar'
+  });
 }
+
 
 // Eliminar habitación
 function deleteRoom(roomId) {
   rooms = rooms.filter(r => r.id !== roomId);
   saveRoomsToStorage();
   renderRoomsTable();
-  alert('Habitación eliminada exitosamente');
+
+  Swal.fire({
+    title: '¡Habitación eliminada exitosamente! 🧹',
+    text: 'La habitación ha sido removida del sistema.',
+    icon: 'success',
+    confirmButtonText: 'Aceptar'
+  });
 }

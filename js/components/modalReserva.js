@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn } from '../layout/auth.js';
 import { showSection } from '../layout/navbar.js';
-import { addReservation, checkRoomAvailability } from '../layout/storage.js';
+import { addReservation, checkRoomAvailability, getAvailableDateRanges } from '../layout/storage.js';
 
 let currentRoom = null;
 let currentSearchData = null;
@@ -17,6 +17,11 @@ export function showRoomModal(room, searchData) {
   const numNights = Math.ceil((new Date(searchData.fechaSalida) - new Date(searchData.fechaEntrada)) / (1000 * 60 * 60 * 24));
   const totalPrice = room.pricePerNight * numNights;
 
+  const availableRanges = getAvailableDateRanges(room.id);
+  const rangesText = availableRanges.length > 0
+    ? availableRanges.map(range => `${range.start.toLocaleDateString()} - ${range.end.toLocaleDateString()}`).join(', ')
+    : 'No hay fechas disponibles próximamente.';
+
   modal.innerHTML = `
     <div class="modal-content">
       <span class="close-modal">&times;</span>
@@ -24,10 +29,12 @@ export function showRoomModal(room, searchData) {
       <img src="${room.image}" alt="${room.name}" style="width: 100%; max-height: 300px; object-fit: cover;">
       <p>${room.description}</p>
       <div class="room-details">
+        <p><strong>Ubicación:</strong> ${room.location}</p>
         <p><strong>Capacidad:</strong> ${room.capacity} personas</p>
         <p><strong>Camas:</strong> ${room.beds}</p>
         <p><strong>Servicios:</strong> ${room.services.join(', ')}</p>
         <p><strong>Precio por noche:</strong> $${room.pricePerNight.toLocaleString()}</p>
+        <p><strong>Rango de fechas disponibles:</strong> ${rangesText}</p>
         <p><strong>Fecha de entrada:</strong> ${searchData.fechaEntrada}</p>
         <p><strong>Fecha de salida:</strong> ${searchData.fechaSalida}</p>
         <p><strong>Número de noches:</strong> ${numNights}</p>
@@ -47,19 +54,31 @@ export function showRoomModal(room, searchData) {
 
   // Reservar
   modal.querySelector('.btn-reserve-modal').addEventListener('click', () => {
-    if (!isUserLoggedIn()) {
-      alert('Debes iniciar sesión para hacer una reserva.');
+  if (!isUserLoggedIn()) {
+    Swal.fire({
+      title: 'Debes iniciar sesión',
+      text: 'Para hacer una reserva, primero inicia sesión en tu cuenta.',
+      icon: 'warning',
+      confirmButtonText: 'Ir a iniciar sesión'
+    }).then(() => {
       showSection('login');
       modal.style.display = 'none';
-      return;
-    }
+    });
+    return;
+  }
 
     // Verificar disponibilidad antes de reservar
-    if (!checkRoomAvailability(room.id, searchData.fechaEntrada, searchData.fechaSalida)) {
-      alert('Lo sentimos, la habitación ya no está disponible para las fechas seleccionadas.');
-      modal.style.display = 'none';
-      return;
-    }
+  if (!checkRoomAvailability(room.id, searchData.fechaEntrada, searchData.fechaSalida)) {
+  Swal.fire({
+    title: 'Lo sentimos 😔',
+    text: 'La habitación ya no está disponible para las fechas seleccionadas.',
+    icon: 'error',
+    confirmButtonText: 'Entendido'
+  }).then(() => {
+    modal.style.display = 'none';
+  });
+  return;
+}
 
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     const reservation = {
@@ -73,10 +92,17 @@ export function showRoomModal(room, searchData) {
       fechaReserva: new Date().toISOString()
     };
 
-    addReservation(reservation);
-    alert('Reserva realizada exitosamente!');
-    modal.style.display = 'none';
+addReservation(reservation);
 
+Swal.fire({
+  title: '¡Reserva realizada exitosamente! 🎉',
+  text: 'Tu reserva ha sido confirmada.',
+  icon: 'success',
+  confirmButtonText: 'Aceptar'
+}).then(() => {
+  modal.style.display = 'none';
+  });
+  
     // Disparar evento para recargar reservas
     window.dispatchEvent(new CustomEvent('reservationUpdated'));
   });

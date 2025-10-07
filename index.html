@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hotel el Rincón del Carmen</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" defer src="js/app.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -142,6 +143,7 @@
               </div>
               <div class="room-content">
                 <h3>Suite Deluxe</h3>
+                <p><strong>Ubicación:</strong> cartagena,colombia</p>
                 <p>Espaciosa suite con vista panorámica, jacuzzi privado y todas las comodidades de lujo.</p>
                 <div class="room-features">
                   <span>👥 2-4 personas</span>
@@ -163,6 +165,7 @@
               </div>
               <div class="room-content">
                 <h3>Habitación Ejecutiva</h3>
+                <p><strong>Ubicación:</strong> Floridablanca, Colombia</p>
                 <p>Perfecta para viajes de negocios o parejas, con escritorio y zona de trabajo.</p>
                 <div class="room-features">
                   <span>👥 2 personas</span>
@@ -184,6 +187,7 @@
               </div>
               <div class="room-content">
                 <h3>Habitación Familiar</h3>
+                <p><strong>Ubicación:</strong> Floridablanca, Colombia</p>
                 <p>Amplio espacio para toda la familia con dos habitaciones conectadas.</p>
                 <div class="room-features">
                   <span>👥 4-6 personas</span>
@@ -288,6 +292,15 @@
             </div>
           </div>
           <div class="form-row">
+            <div class="form-group">
+              <label for="ubicacion">Ubicación</label>
+              <select id="ubicacion">
+                <option value="">cartagena, colombia</option>
+                <option value="bucaramanga">bucaramanga, santander</option>
+                <option value="cucuta">cúcuta, norte de santander</option>
+                <option value="barranquilla">barranquilla, atlántico</option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="num-personas">Número de personas</label>
               <select id="num-personas" required>

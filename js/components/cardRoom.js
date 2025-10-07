@@ -10,6 +10,7 @@ export function createRoomCard(room, numNights = 1) {
     </div>
     <div class="room-result-content">
       <h3>${room.name}</h3>
+      <p><strong>Ubicación:</strong> ${room.location}</p>
       <p>${room.description}</p>
       <div class="room-features">
         <span>👥 ${room.capacity} personas</span>

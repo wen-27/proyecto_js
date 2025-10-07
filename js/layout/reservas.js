@@ -85,12 +85,32 @@ function cancelReservation(reservationId) {
   let reservations = getReservations();
   reservations = reservations.filter(r => r.id !== reservationId);
   saveReservations(reservations);
-  loadReservations(); // Recargar la lista
-  alert('Reserva cancelada exitosamente.');
+  loadReservations();
+
+  Swal.fire({
+    title: 'Reserva cancelada 🗑️',
+    text: 'Tu reserva ha sido eliminada exitosamente.',
+    icon: 'success',
+    confirmButtonText: 'Aceptar'
+  });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
   loadReservations(); // Cargar reservas al inicio
+
+  // Poblar select de ubicaciones
+  const ubicacionSelect = document.getElementById('ubicacion');
+  if (ubicacionSelect) {
+    const rooms = getRooms();
+    const locations = [...new Set(rooms.map(room => room.location))];
+    locations.forEach(location => {
+      const option = document.createElement('option');
+      option.value = location;
+      option.textContent = location;
+      ubicacionSelect.appendChild(option);
+    });
+  }
 
   // Escuchar actualizaciones de reservas
   window.addEventListener('reservationUpdated', () => {
@@ -98,21 +118,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Manejar clics en botones de reservar
-  document.querySelectorAll('.btn-reserve, .reserve-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (!isUserLoggedIn()) {
-        alert('Debes iniciar sesión para hacer una reserva.');
+document.querySelectorAll('.btn-reserve, .reserve-button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!isUserLoggedIn()) {
+      Swal.fire({
+        title: 'Inicia sesión 🔒',
+        text: 'Debes iniciar sesión para hacer una reserva.',
+        icon: 'warning',
+        confirmButtonText: 'Ir al login'
+      }).then(() => {
         showSection('login');
-        return;
-      }
-      // Aquí iría la lógica para procesar la reserva
-      alert('Reserva realizada exitosamente!');
-      // Podrías redirigir a una página de confirmación o mostrar un modal
+      });
+      return;
+    }
+
+    // Aquí iría la lógica real de reserva (guardar, validar fechas, etc.)
+
+    Swal.fire({
+      title: '¡Reserva exitosa! 🎉',
+      text: 'Tu reserva ha sido realizada correctamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
     });
   });
+});
 
-  // Manejar búsqueda de habitaciones
+
+      // Manejar búsqueda de habitaciones
   const searchBtn = document.querySelector('.btn-search');
   if (searchBtn) {
     searchBtn.addEventListener('click', (e) => {
@@ -121,22 +155,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const fechaEntrada = document.getElementById('fecha-entrada').value;
       const fechaSalida = document.getElementById('fecha-salida').value;
       const numPersonas = parseInt(document.getElementById('num-personas').value);
+      const ubicacion = document.getElementById('ubicacion').value;
 
       if (!fechaEntrada || !fechaSalida || !numPersonas) {
-        alert('Por favor, completa todos los campos.');
-        return;
-      }
+      Swal.fire({
+      title: 'Campos incompletos 📝',
+      text: 'Por favor, completa todos los campos.',
+      icon: 'warning',
+      confirmButtonText: 'Entendido'
+    });
+    return;
+    }
 
-      const entrada = new Date(fechaEntrada);
-      const salida = new Date(fechaSalida);
+    const entrada = new Date(fechaEntrada);
+    const salida = new Date(fechaSalida);
 
-      if (entrada >= salida) {
-        alert('La fecha de salida debe ser posterior a la de entrada.');
-        return;
-      }
+    if (entrada >= salida) {
+    Swal.fire({
+    title: 'Fechas inválidas 📅',
+    text: 'La fecha de salida debe ser posterior a la de entrada.',
+    icon: 'error',
+    confirmButtonText: 'Corregir'
+    });
+    return;
+    }
+
+
+
 
       const rooms = getRooms();
-      const availableRooms = rooms.filter(room => room.capacity >= numPersonas && room.available && checkRoomAvailability(room.id, fechaEntrada, fechaSalida));
+      let availableRooms = rooms.filter(room => room.capacity >= numPersonas && room.available && checkRoomAvailability(room.id, fechaEntrada, fechaSalida));
+
+      if (ubicacion) {
+        availableRooms = availableRooms.filter(room => room.location.toLowerCase() === ubicacion.toLowerCase());
+      }
 
       const roomsGrid = document.querySelector('.rooms-grid');
       roomsGrid.innerHTML = '';

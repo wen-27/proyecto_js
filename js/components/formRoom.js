@@ -10,6 +10,11 @@ export function createRoomForm(room = null, onSave, onCancel) {
     <h3>${isEdit ? 'Editar Habitación' : 'Agregar Nueva Habitación'}</h3>
 
     <div class="form-group">
+      <label for="room-location">Ubicación:</label>
+      <input type="text" id="room-location" name="location" required value="${room ? room.location : ''}">
+    </div>
+
+    <div class="form-group">
       <label for="room-name">Nombre de la Habitación:</label>
       <input type="text" id="room-name" name="name" required value="${room ? room.name : ''}">
     </div>
@@ -58,6 +63,7 @@ export function createRoomForm(room = null, onSave, onCancel) {
     const formData = new FormData(form);
     const roomData = {
       id: isEdit ? room.id : Date.now(), // Simple ID generation
+      location: formData.get('location'),
       name: formData.get('name'),
       description: formData.get('description'),
       beds: parseInt(formData.get('beds')),
