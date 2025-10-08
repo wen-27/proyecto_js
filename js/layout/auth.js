@@ -171,6 +171,28 @@ export function isUserLoggedIn() {
 
 export function logoutUser() {
   sessionStorage.removeItem('currentUser');
+  // Limpiar reservas al cerrar sesión
+  localStorage.removeItem('hotel_reservations');
+  // Limpiar UI de reservas
+  const reservationsList = document.querySelector('.reservations-list');
+  if (reservationsList) {
+    reservationsList.innerHTML = `
+      <div class="no-reservations">
+        <div class="no-reservations-icon">📅</div>
+        <h3>No tienes reservas activas</h3>
+        <p>¡Haz tu primera reserva ahora!</p>
+      </div>
+    `;
+  }
+  const roomsGrid = document.querySelector('.rooms-grid');
+  if (roomsGrid) {
+    roomsGrid.innerHTML = '';
+  }
+  // Limpiar campos del login
+  if (loginEmailInput) loginEmailInput.value = '';
+  if (loginPasswordInput) loginPasswordInput.value = '';
+  if (userTypeUsuario) userTypeUsuario.checked = true;
+  if (userTypeAdmin) userTypeAdmin.checked = false;
   Swal.fire({ title: 'Sesión cerrada', icon: 'info', timer: 1500, showConfirmButton: false })
     .then(() => {
       showSection('login');

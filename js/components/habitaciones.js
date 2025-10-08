@@ -29,7 +29,7 @@ export function habitacionesComponent() {
                   <span>🍷 Minibar</span>
                 </div>
                 <div class="room-price">$250,000 <span>/ noche</span></div>
-                <a href="#login" class="reserve-button">Reservar</a>
+                <button class="reserve-button-carousel" data-room-name="Suite Deluxe">Reservar</button>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ export function habitacionesComponent() {
                   <span>☕ Cafetera</span>
                 </div>
                 <div class="room-price">$180,000 <span>/ noche</span></div>
-                <a href="#login" class="reserve-button">Reservar</a>
+                <button class="reserve-button-carousel" data-room-name="Habitación Ejecutiva">Reservar</button>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@ export function habitacionesComponent() {
                   <span>🎮 Área de juegos</span>
                 </div>
                 <div class="room-price">$320,000 <span>/ noche</span></div>
-                <a href="#login" class="reserve-button">Reservar</a>
+                <button class="reserve-button-carousel" data-room-name="Habitación Familiar">Reservar</button>
               </div>
             </div>
           </div>

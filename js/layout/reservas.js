@@ -183,6 +183,28 @@ document.querySelectorAll('.btn-reserve, .reserve-button').forEach(button => {
   });
 });
 
+// Manejar clics en botones de reservar del carrusel
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('reserve-button-carousel')) {
+    e.preventDefault();
+
+    if (!isUserLoggedIn()) {
+      Swal.fire({
+        title: 'Inicia sesión 🔒',
+        text: 'Debes iniciar sesión para hacer una reserva.',
+        icon: 'warning',
+        confirmButtonText: 'Ir al login'
+      }).then(() => {
+        showSection('login');
+      });
+      return;
+    }
+
+    // Si está logueado, ir a la sección de reservas
+    showSection('reservas');
+  }
+});
+
 
       // Manejar búsqueda de habitaciones
   const searchBtn = document.querySelector('.btn-search');

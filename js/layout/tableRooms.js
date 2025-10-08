@@ -1,4 +1,3 @@
-// roomsTable.js
 import { getRooms } from './storage.js';
 
 // Función para obtener habitaciones con rutas de imagen normalizadas
@@ -13,12 +12,19 @@ function getRoomsWithImages() {
   });
 }
 
-// Componente para crear tabla de habitaciones
+// Componente para crear tabla de habitaciones responsive tipo "cards" en móviles
 export function createRoomsTable(numNights = 1) {
   const rooms = getRoomsWithImages(); // rutas ya normalizadas
+
+  // Crear contenedor responsive
+  const container = document.createElement('div');
+  container.className = 'table-responsive';
+
+  // Crear la tabla
   const table = document.createElement('table');
   table.className = 'rooms-table';
 
+  // Cabecera
   const thead = document.createElement('thead');
   thead.innerHTML = `
     <tr>
@@ -32,6 +38,7 @@ export function createRoomsTable(numNights = 1) {
   `;
   table.appendChild(thead);
 
+  // Cuerpo de la tabla
   const tbody = document.createElement('tbody');
 
   rooms.forEach(room => {
@@ -39,17 +46,17 @@ export function createRoomsTable(numNights = 1) {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-      <td>
+      <td data-label="Imagen">
         <img src="${room.image}" 
              alt="${room.name}" 
              style="width: 100px; height: 60px; object-fit: cover;"
              onerror="this.src='./img/salas/fallback.png'">
       </td>
-      <td>${room.name}</td>
-      <td>${room.capacity} personas</td>
-      <td>${room.services.join(', ')}</td>
-      <td>$${totalPrice.toLocaleString()} (${numNights} noches)</td>
-      <td>
+      <td data-label="Nombre">${room.name}</td>
+      <td data-label="Capacidad">${room.capacity} personas</td>
+      <td data-label="Servicios">${room.services.join(', ')}</td>
+      <td data-label="Precio Total">$${totalPrice.toLocaleString()} (${numNights} noches)</td>
+      <td data-label="Acción">
         <button class="btn-details" data-room-id="${room.id}">Ver Detalles</button>
       </td>
     `;
@@ -58,6 +65,7 @@ export function createRoomsTable(numNights = 1) {
   });
 
   table.appendChild(tbody);
-  return table;
-}
+  container.appendChild(table);
 
+  return container; // Retornamos el div que envuelve la tabla
+}
