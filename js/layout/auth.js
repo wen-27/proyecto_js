@@ -1,5 +1,6 @@
 // Manejo de login y registro usando localStorage 
-import { getUsers, addUser, findUserByEmail, getUserNotifications, clearUserNotifications } from './storage.js';
+import { getUsers, addUser, findUserByEmail, getUserNotifications, clearUserNotifications, getReservations } from './storage.js';
+import { loadReservations } from './reservas.js';
 import { showSection, updateNav } from './navbar-layout.js';
 
 // 🔹 Variables para elementos del DOM 
@@ -223,7 +224,13 @@ function onLoginSuccess(user) {
   if (user.role === 'admin') {
     showSection('admin');
   } else {
-    showSection('inicio');
+    const reservations = getReservations().filter(r => r.userEmail === user.email);
+    if (reservations.length > 0) {
+      showSection('reservas');
+      loadReservations();
+    } else {
+      showSection('inicio');
+    }
   }
   updateNav();
 }

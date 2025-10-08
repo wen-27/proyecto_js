@@ -8,12 +8,14 @@ import { createRoomCard } from '../components/cardRoom.js';
 
 
 
-function loadReservations() {
+export function loadReservations() {
   const currentUser = getCurrentUser();
   let reservations = getReservations();
 
-  
-  if (currentUser && currentUser.role !== 'admin') {
+
+  if (!currentUser) {
+    reservations = [];
+  } else if (currentUser.role !== 'admin') {
     reservations = reservations.filter(r => r.userEmail === currentUser.email);
   }
 

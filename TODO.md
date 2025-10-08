@@ -1,2 +1,0 @@
-- [x] Change sessionStorage to localStorage in auth.js for currentUser persistence
-- [x] Change sessionStorage to localStorage in storage.js for getCurrentUser
