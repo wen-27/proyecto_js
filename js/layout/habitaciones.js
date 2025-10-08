@@ -51,63 +51,77 @@ function renderRoomManagementUI() {
   document.getElementById('add-room-btn').addEventListener('click', () => showRoomForm());
 }
 
-// Renderizar tabla de habitaciones
-// Renderizar tabla de habitaciones
+// Renderizar tabla bonita de habitaciones
 function renderRoomsTable() {
   const container = document.getElementById('rooms-table-container');
   if (!container) return;
 
-  const table = document.createElement('table');
-  table.className = 'admin-rooms-table';
+  const tableWrapper = document.createElement('div');
+  tableWrapper.className = 'admin-table-panel';
 
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Ubicación</th>
-        <th>Nombre</th>
-        <th>Camas</th>
-        <th>Capacidad</th>
-        <th>Precio/Noche</th>
-        <th>Servicios</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${rooms.map(room => `
-        <tr>
-          <td>${room.id}</td>
-          <td>${room.location}</td>
-          <td>${room.name}</td>
-          <td>${room.beds}</td>
-          <td>${room.capacity}</td>
-          <td>$${room.pricePerNight.toLocaleString()}</td>
-          <td>${room.services.join(', ')}</td>
-          <td>
-            <button class="btn-edit" data-room-id="${room.id}">Editar</button>
-            <button class="btn-delete" data-room-id="${room.id}">Eliminar</button>
-          </td>
-        </tr>
-      `).join('')}
-    </tbody>
+  tableWrapper.innerHTML = `
+    <div class="admin-table-header">
+      <h3>Habitaciones Registradas</h3>
+      <span class="room-count">${rooms.length} habitaciones</span>
+    </div>
+    <div class="table-responsive">
+      <table class="admin-rooms-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Camas</th>
+            <th>Capacidad</th>
+            <th>Precio/Noche</th>
+            <th>Servicios</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rooms.map(room => `
+            <tr>
+              <td><span class="id-badge">${room.id}</span></td>
+              <td><img src="${room.image}" alt="${room.name}" class="room-thumb"></td>
+              <td><strong>${room.name}</strong></td>
+              <td>${room.location}</td>
+              <td>${room.beds}</td>
+              <td>${room.capacity}</td>
+              <td><span class="price">$${room.pricePerNight.toLocaleString()}</span></td>
+              <td><div class="services-list">${room.services.map(s => `<span class="service-chip">${s}</span>`).join('')}</div></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-edit" data-room-id="${room.id}" title="Editar habitación">
+                    <i class="icon-edit">✏️</i> Editar
+                  </button>
+                  <button class="btn-delete" data-room-id="${room.id}" title="Eliminar habitación">
+                    <i class="icon-delete">🗑️</i> Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
   `;
 
   container.innerHTML = '';
-  container.appendChild(table);
+  container.appendChild(tableWrapper);
 
-  //  Botones de editar
-  table.querySelectorAll('.btn-edit').forEach(btn => {
+  // Event listeners
+  tableWrapper.querySelectorAll('.btn-edit').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const roomId = parseInt(e.target.dataset.roomId);
+      const roomId = parseInt(e.target.closest('.btn-edit').dataset.roomId);
       const room = rooms.find(r => r.id === roomId);
       if (room) showRoomForm(room);
     });
   });
 
-  //  Botones de eliminar con SweetAlert2
-  table.querySelectorAll('.btn-delete').forEach(btn => {
+  tableWrapper.querySelectorAll('.btn-delete').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const roomId = parseInt(e.target.dataset.roomId);
+      const roomId = parseInt(e.target.closest('.btn-delete').dataset.roomId);
       const row = e.target.closest('tr');
 
       Swal.fire({
@@ -130,7 +144,7 @@ function renderRoomsTable() {
           setTimeout(() => row.remove(), 400);
 
           Swal.fire({
-            title: "Eliminada ",
+            title: "Eliminada",
             text: "La habitación fue eliminada correctamente.",
             icon: "success",
             confirmButtonText: "Aceptar",

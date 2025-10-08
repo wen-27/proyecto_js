@@ -1833,61 +1833,138 @@ input[type="radio"] {
   box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
 }
 
+/* Panel de tabla admin */
+.admin-table-panel {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.admin-table-header {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-table-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.room-count {
+  background: rgba(255,255,255,0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 /* ===== Contenedor scrollable para tablas ===== */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: 2rem;
 }
 
 /* Tabla */
-.table-responsive table {
+.admin-rooms-table {
   width: 100%;
-  min-width: 600px;
+  min-width: 800px;
   border-collapse: collapse;
-  border-radius: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background: white;
 }
 
-.table-responsive th,
-.table-responsive td {
-  padding: 0.75rem;
+.admin-rooms-table th,
+.admin-rooms-table td {
+  padding: 1rem;
   text-align: center;
   border-bottom: 1px solid #e5e7eb;
-  word-wrap: break-word;
+  vertical-align: middle;
 }
 
-.table-responsive th {
-  background: #f9fafb;
-  color: #1f2937;
+.admin-rooms-table th {
+  background: #f8fafc;
+  color: #374151;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-rooms-table tr:hover {
+  background: #fef7ed;
+  transition: background 0.2s ease;
+}
+
+/* Elementos específicos */
+.id-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
   font-weight: 600;
+  font-size: 0.8rem;
 }
 
-.table-responsive tr:hover {
-  background: #f9fafb;
+.room-thumb {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 2px solid #e5e7eb;
 }
 
-/* Botones dentro de la tabla */
-.btn-details,
+.price {
+  color: #f59e0b;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+.service-chip {
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .btn-edit,
 .btn-delete {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  margin: 0.2rem;
-}
-
-.btn-details {
-  background: #3b82f6;
-  color: white;
-}
-
-.btn-details:hover {
-  background: #2563eb;
+  font-size: 0.85rem;
+  min-width: 80px;
+  justify-content: center;
 }
 
 .btn-edit {
@@ -1897,6 +1974,8 @@ input[type="radio"] {
 
 .btn-edit:hover {
   background: #bfdbfe;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
 }
 
 .btn-delete {
@@ -1906,6 +1985,13 @@ input[type="radio"] {
 
 .btn-delete:hover {
   background: #fecaca;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.icon-edit,
+.icon-delete {
+  font-size: 1rem;
 }
 
 /* ===== Room Form ===== */
