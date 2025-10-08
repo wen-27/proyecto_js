@@ -78,6 +78,9 @@ export function initAuth() {
   // Manejar hash inicial
   handleHashChange();
 
+  // Limpiar sesión al iniciar la app
+  localStorage.removeItem('currentUser');
+
   // Eventos botones
   if (loginSubmitBtn) {
     loginSubmitBtn.addEventListener('click', e => {
@@ -199,7 +202,7 @@ export function logoutUser() {
 }
 
 function onLoginSuccess(user) {
-  sessionStorage.setItem('currentUser', JSON.stringify(user));
+  localStorage.setItem('currentUser', JSON.stringify(user));
 
   
   const notifications = getUserNotifications(user.email);

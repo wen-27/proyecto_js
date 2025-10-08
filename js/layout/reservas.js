@@ -72,17 +72,26 @@ function loadReservations() {
       </div>
       <div class="reservation-actions">
         <button class="btn-action btn-details" data-reservation-id="${reservation.id}">Ver Detalles</button>
-        <button class="btn-action btn-modify" data-reservation-id="${reservation.id}">Modificar Reserva</button>
       </div>
     `;
     reservationsList.appendChild(reservationCard);
   });
 
-  // Event listeners for modify buttons
-  document.querySelectorAll('.reservation-card .btn-modify').forEach(button => {
+  // Event listeners for details buttons
+  document.querySelectorAll('.reservation-card .btn-details').forEach(button => {
     button.addEventListener('click', (e) => {
       const reservationId = parseInt(e.target.dataset.reservationId);
-      openModifyReservationModal(reservationId);
+      const reservations = getReservations();
+      const reservation = reservations.find(r => r.id === reservationId);
+      if (!reservation) return;
+      const room = getRooms().find(r => r.id === reservation.roomId);
+      if (!room) return;
+      const searchData = {
+        fechaEntrada: reservation.fechaEntrada,
+        fechaSalida: reservation.fechaSalida,
+        numPersonas: reservation.numPersonas
+      };
+      showRoomModal(room, searchData);
     });
   });
 
