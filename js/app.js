@@ -1,9 +1,10 @@
-import './layout/auth.js';
+import { initAuth } from './layout/auth.js';
+import { initNavListeners } from './layout/navbar-layout.js';
 import './layout/reservas.js';
 import { initRoomManagement } from './layout/habitaciones.js';
 import { createFooter } from './components/footer.js';
 import { createNavbar } from './components/navbar.js';
-import { createLoginSection } from './components/login.js'; 
+import { createLoginSection } from './components/login.js';
 import { habitacionesComponent } from './components/habitaciones.js';
 import { serviciosComponent } from './components/servicios.js';
 import { contactoComponent } from './components/contacto.js';
@@ -16,9 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (header) header.appendChild(createNavbar());
 
   // 🔹 Login/Registro
-  const main = document.querySelector('main') || document.body; 
+  const main = document.querySelector('main') || document.body;
   const loginSection = createLoginSection();
   main.prepend(loginSection);
+
+  // Inicializar auth después de crear el login
+  initAuth();
+
+  // Inicializar listeners de navegación
+  initNavListeners();
 
   // 🔹 Habitaciones
   const habitacionesDiv = document.getElementById('habitaciones-container');

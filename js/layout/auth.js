@@ -2,18 +2,8 @@
 import { getUsers, addUser, findUserByEmail } from './storage.js';
 import { showSection, updateNav } from './navbar-layout.js';
 
-// 🔹 Referencias a los elementos del DOM
-const loginView = document.getElementById('login-view');
-const registerView = document.getElementById('register-view');
-
-const loginEmailInput = loginView ? loginView.querySelector('#login-email') : null;
-const loginPasswordInput = loginView ? loginView.querySelector('#login-password') : null;
-
-const loginSubmitBtn = loginView ? loginView.querySelector('.submit-btn') : null;
-const registerSubmitBtn = registerView ? registerView.querySelector('.submit-btn') : null;
-
-const userTypeUsuario = loginView ? loginView.querySelector('#user-type-usuario') : null;
-const userTypeAdmin = loginView ? loginView.querySelector('#user-type-admin') : null;
+// 🔹 Variables para elementos del DOM (inicializadas en initAuth)
+let loginView, registerView, loginEmailInput, loginPasswordInput, loginSubmitBtn, registerSubmitBtn, userTypeUsuario, userTypeAdmin;
 
 // 🔹 Función para mostrar login o registro
 function showView(view) {
@@ -51,11 +41,6 @@ function handleHashChange() {
 window.addEventListener('popstate', handleHashChange);
 window.addEventListener('hashchange', handleHashChange);
 
-document.addEventListener('DOMContentLoaded', () => {
-  handleHashChange();
-  initTabs();
-});
-
 // 🔹 Inicializar tabs de login/registro
 function initTabs() {
   document.querySelectorAll('.tab-login').forEach(el => {
@@ -71,6 +56,73 @@ function initTabs() {
     });
   });
 }
+
+// 🔹 Función para inicializar auth después de que el DOM esté listo
+export function initAuth() {
+  // Asignar referencias a elementos del DOM
+  loginView = document.getElementById('login-view');
+  registerView = document.getElementById('register-view');
+
+  loginEmailInput = loginView ? loginView.querySelector('#login-email') : null;
+  loginPasswordInput = loginView ? loginView.querySelector('#login-password') : null;
+
+  loginSubmitBtn = loginView ? loginView.querySelector('.submit-btn') : null;
+  registerSubmitBtn = registerView ? registerView.querySelector('.submit-btn') : null;
+
+  userTypeUsuario = loginView ? loginView.querySelector('#user-type-usuario') : null;
+  userTypeAdmin = loginView ? loginView.querySelector('#user-type-admin') : null;
+
+  // Inicializar tabs
+  initTabs();
+
+  // Manejar hash inicial
+  handleHashChange();
+
+  // Eventos botones
+  if (loginSubmitBtn) {
+    loginSubmitBtn.addEventListener('click', e => {
+      e.preventDefault();
+      if (!loginEmailInput || !loginPasswordInput || !userTypeUsuario) return;
+
+      const email = loginEmailInput.value.trim();
+      const password = loginPasswordInput.value.trim();
+      const userType = userTypeUsuario.checked ? 'usuario' : 'admin';
+
+      if (!email || !password) return Swal.fire({ title: 'Campos incompletos', icon: 'warning' });
+      loginUser(email, password, userType);
+    });
+  }
+
+  if (registerSubmitBtn) {
+    registerSubmitBtn.addEventListener('click', e => {
+      e.preventDefault();
+      if (!registerView) return;
+
+      const inputs = registerView.querySelectorAll('input');
+      const data = {
+        identificacion: inputs[0].value.trim(),
+        nombreCompleto: inputs[1].value.trim(),
+        nacionalidad: inputs[2].value.trim(),
+        email: inputs[3].value.trim(),
+        telefono: inputs[4].value.trim(),
+        password: inputs[5].value.trim()
+      };
+
+      if (Object.values(data).some(v => !v)) {
+        return Swal.fire({ title: 'Campos incompletos', icon: 'warning' });
+      }
+
+      registerUser(data);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Si el login ya está creado, inicializar auth
+  if (document.getElementById('login-view')) {
+    initAuth();
+  }
+});
 
 // 🔹 Función de login
 function loginUser(email, password, userType) {
@@ -110,43 +162,7 @@ function registerUser(data) {
   });
 }
 
-// 🔹 Eventos botones
-if (loginSubmitBtn) {
-  loginSubmitBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (!loginEmailInput || !loginPasswordInput || !userTypeUsuario) return;
 
-    const email = loginEmailInput.value.trim();
-    const password = loginPasswordInput.value.trim();
-    const userType = userTypeUsuario.checked ? 'usuario' : 'admin';
-
-    if (!email || !password) return Swal.fire({ title: 'Campos incompletos', icon: 'warning' });
-    loginUser(email, password, userType);
-  });
-}
-
-if (registerSubmitBtn) {
-  registerSubmitBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (!registerView) return;
-
-    const inputs = registerView.querySelectorAll('input');
-    const data = {
-      identificacion: inputs[0].value.trim(),
-      nombreCompleto: inputs[1].value.trim(),
-      nacionalidad: inputs[2].value.trim(),
-      email: inputs[3].value.trim(),
-      telefono: inputs[4].value.trim(),
-      password: inputs[5].value.trim()
-    };
-
-    if (Object.values(data).some(v => !v)) {
-      return Swal.fire({ title: 'Campos incompletos', icon: 'warning' });
-    }
-
-    registerUser(data);
-  });
-}
 
 // 🔹 Funciones de sesión
 export function isUserLoggedIn() {

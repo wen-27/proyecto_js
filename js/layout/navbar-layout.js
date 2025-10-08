@@ -1,10 +1,23 @@
 // Manejo de navegación entre secciones
 
-import { isUserLoggedIn } from './auth.js';
+import { isUserLoggedIn, logoutUser } from './auth.js';
 
 const sections = ['login', 'inicio', 'reservas', 'contacto', 'admin'];
 
 function showSection(sectionId) {
+  // Verificar permisos para secciones protegidas
+  if (sectionId === 'admin') {
+    if (!isUserLoggedIn()) {
+      showSection('login');
+      return;
+    }
+    const currentUser = getCurrentUser();
+    if (!currentUser || currentUser.role !== 'admin') {
+      showSection('login');
+      return;
+    }
+  }
+
   // Ocultar todas las secciones
   sections.forEach(id => {
     const section = document.getElementById(id);
@@ -47,7 +60,7 @@ function handleHashChange() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+export function initNavListeners() {
   // Manejar clics en enlaces de navegación
   document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -57,6 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Manejar clic en cerrar sesión
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutUser();
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
   // Manejar cambios de hash
   window.addEventListener('hashchange', handleHashChange);
   window.addEventListener('popstate', handleHashChange);
