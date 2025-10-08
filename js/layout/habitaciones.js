@@ -95,7 +95,7 @@ function renderRoomsTable() {
   container.innerHTML = '';
   container.appendChild(table);
 
-  // 🟡 Botones de editar
+  //  Botones de editar
   table.querySelectorAll('.btn-edit').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const roomId = parseInt(e.target.dataset.roomId);
@@ -104,7 +104,7 @@ function renderRoomsTable() {
     });
   });
 
-  // 🔴 Botones de eliminar con SweetAlert2
+  //  Botones de eliminar con SweetAlert2
   table.querySelectorAll('.btn-delete').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const roomId = parseInt(e.target.dataset.roomId);
@@ -130,11 +130,11 @@ function renderRoomsTable() {
           setTimeout(() => row.remove(), 400);
 
           Swal.fire({
-            title: "Eliminada ✅",
+            title: "Eliminada ",
             text: "La habitación fue eliminada correctamente.",
             icon: "success",
             confirmButtonText: "Aceptar",
-            confirmButtonColor: "#3085d6"
+            confirmButtonColor: "#de791aff"
           });
         }
       });

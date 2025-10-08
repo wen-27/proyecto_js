@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn } from './auth.js';
 import { showSection } from './navbar-layout.js';
-import { getRooms, getReservations, saveReservations, checkRoomAvailability, updateReservation, getCurrentUser } from './storage.js';
+import { getRooms, getReservations, saveReservations, checkRoomAvailability, updateReservation, getCurrentUser, addNotification } from './storage.js';
 import { showRoomModal } from './modalReserva.js';
 import { createRoomCard } from '../components/cardRoom.js';
 
@@ -12,7 +12,7 @@ function loadReservations() {
   const currentUser = getCurrentUser();
   let reservations = getReservations();
 
-  // If user is admin, show all reservations, else filter by user email
+  
   if (currentUser && currentUser.role !== 'admin') {
     reservations = reservations.filter(r => r.userEmail === currentUser.email);
   }
@@ -78,7 +78,7 @@ function loadReservations() {
     reservationsList.appendChild(reservationCard);
   });
 
-  // Confirmación con SweetAlert2 💫
+  // Confirmaciónes
   document.querySelectorAll('.btn-cancel').forEach(button => {
     button.addEventListener('click', (e) => {
       const reservationId = parseInt(e.target.dataset.reservationId);
@@ -96,7 +96,7 @@ function loadReservations() {
       }).then((result) => {
         if (result.isConfirmed) {
           cancelReservation(reservationId);
-          // ✨ Animación de eliminación visual
+         
           card.style.transition = "all 0.5s ease";
           card.style.opacity = "0";
           card.style.transform = "translateY(-10px)";
@@ -129,10 +129,18 @@ function loadReservations() {
 
 function cancelReservation(reservationId) {
   let reservations = getReservations();
+  const reservationToCancel = reservations.find(r => r.id === reservationId);
+  const currentUser = getCurrentUser();
+
   reservations = reservations.filter(r => r.id !== reservationId);
   saveReservations(reservations);
+
+  if (currentUser && currentUser.role === 'admin' && reservationToCancel && reservationToCancel.userEmail !== currentUser.email) {
+    addNotification(reservationToCancel.userEmail, 'Tu reserva ha sido cancelada por el administrador.');
+  }
+
   loadReservations();
-  loadAdminReservations(); // Reload admin reservations if applicable
+  loadAdminReservations(); 
 
   Swal.fire({
     title: 'Reserva cancelada 🗑️',
@@ -209,7 +217,6 @@ function loadAdminReservations() {
     adminReservationsList.appendChild(reservationCard);
   });
 
-  // Event listeners for admin actions
   document.querySelectorAll('.admin-reservations-list .btn-cancel').forEach(button => {
     button.addEventListener('click', (e) => {
       const reservationId = parseInt(e.target.dataset.reservationId);
@@ -255,7 +262,6 @@ function loadAdminReservations() {
     });
   });
 
-  // Event listeners for modify
   document.querySelectorAll('.admin-reservations-list .btn-modify').forEach(button => {
     button.addEventListener('click', (e) => {
       const reservationId = parseInt(e.target.dataset.reservationId);
@@ -264,7 +270,7 @@ function loadAdminReservations() {
   });
 }
 
-// Function to open a modal or prompt to modify reservation details
+
 function openModifyReservationModal(reservationId) {
   const reservations = getReservations();
   const reservation = reservations.find(r => r.id === reservationId);
@@ -304,8 +310,7 @@ function openModifyReservationModal(reservationId) {
   }).then((result) => {
     if (result.isConfirmed) {
       const { fechaEntrada, fechaSalida, numPersonas } = result.value;
-
-      // Check room availability for new dates
+ 
       if (!checkRoomAvailability(reservation.roomId, fechaEntrada, fechaSalida)) {
         Swal.fire({
           title: 'No disponible',
@@ -315,7 +320,7 @@ function openModifyReservationModal(reservationId) {
         return;
       }
 
-      // Update reservation
+      
       const updated = updateReservation(reservationId, {
         fechaEntrada,
         fechaSalida,

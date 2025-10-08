@@ -3,7 +3,8 @@
 const STORAGE_KEYS = {
   USERS: 'hotel_users',
   ROOMS: 'hotel_rooms',
-  RESERVATIONS: 'hotel_reservations'
+  RESERVATIONS: 'hotel_reservations',
+  NOTIFICATIONS: 'hotel_notifications'
 };
 
 // 🔹 Inicializar admin por defecto si no existe
@@ -157,4 +158,36 @@ export function getAvailableDateRanges(roomId) {
 export function getCurrentUser() {
   const user = sessionStorage.getItem('currentUser');
   return user ? JSON.parse(user) : null;
+}
+
+// Notificaciones
+export function getNotifications() {
+  const notifications = localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS);
+  return notifications ? JSON.parse(notifications) : {};
+}
+
+export function saveNotifications(notifications) {
+  localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(notifications));
+}
+
+export function addNotification(userEmail, message) {
+  const notifications = getNotifications();
+  if (!notifications[userEmail]) {
+    notifications[userEmail] = [];
+  }
+  notifications[userEmail].push({ message, date: new Date().toISOString() });
+  saveNotifications(notifications);
+}
+
+export function getUserNotifications(userEmail) {
+  const notifications = getNotifications();
+  return notifications[userEmail] || [];
+}
+
+export function clearUserNotifications(userEmail) {
+  const notifications = getNotifications();
+  if (notifications[userEmail]) {
+    delete notifications[userEmail];
+    saveNotifications(notifications);
+  }
 }

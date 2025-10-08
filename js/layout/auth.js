@@ -1,8 +1,8 @@
-// Manejo de login y registro usando localStorage + SweetAlert2
-import { getUsers, addUser, findUserByEmail } from './storage.js';
+// Manejo de login y registro usando localStorage 
+import { getUsers, addUser, findUserByEmail, getUserNotifications, clearUserNotifications } from './storage.js';
 import { showSection, updateNav } from './navbar-layout.js';
 
-// 🔹 Variables para elementos del DOM (inicializadas en initAuth)
+// 🔹 Variables para elementos del DOM 
 let loginView, registerView, loginEmailInput, loginPasswordInput, loginSubmitBtn, registerSubmitBtn, userTypeUsuario, userTypeAdmin;
 
 // 🔹 Función para mostrar login o registro
@@ -202,6 +202,23 @@ export function logoutUser() {
 
 function onLoginSuccess(user) {
   sessionStorage.setItem('currentUser', JSON.stringify(user));
+
+  
+  const notifications = getUserNotifications(user.email);
+  if (notifications.length > 0) {
+
+    notifications.forEach(notification => {
+      Swal.fire({
+        title: 'Notificación',
+        text: notification.message,
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+      });
+    });
+  
+    clearUserNotifications(user.email);
+  }
+
   if (user.role === 'admin') {
     showSection('admin');
   } else {
