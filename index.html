@@ -8,13 +8,13 @@
   <script type="module" defer src="js/app.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
   <!-- 🔹 Navegación -->
   <header></header>
 
   <!-- 🔹 Página Login -->
   <main id="root"></main>
+
   <!-- 🔹 Página Inicio -->
   <section id="inicio">
     <div class="hero">
@@ -47,49 +47,7 @@
     </div>
 
     <!-- 🔸 Servicios -->
-    <div class="section" id="servicios">
-      <h2 class="section-title">Servicios Exclusivos</h2>
-      <p class="section-subtitle">Todo lo que necesitas para una estadía inolvidable</p>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <img src="img/serviciosSSS/portada_ejecafeterogorumet_1200x800_2023.jpg" alt="Restaurante Gourmet">
-          <h3>Restaurante Gourmet</h3>
-          <p>Cocina internacional y local preparada por chefs expertos.</p>
-        </div>
-
-        <div class="service-card">
-          <img src="img/serviciosSSS/spa-massage-2.jpg" alt="Masajes y Tratamientos">
-          <h3>Masajes y Tratamientos</h3>
-          <p>Terapias personalizadas para tu bienestar completo.</p>
-        </div>
-
-        <div class="service-card">
-          <img src="img/serviciosSSS/transporte.png" alt="Transporte">
-          <h3>Transporte</h3>
-          <p>Servicio de traslado desde y hacia el aeropuerto.</p>
-        </div>
-
-        <div class="service-card">
-          <img src="img/serviciosSSS/sauna.jpg" alt="Zonas Húmedas">
-          <h3>Zonas Húmedas</h3>
-          <p>Turco, sauna y duchas escocesas para tu relajación.</p>
-        </div>
-
-        <div class="service-card">
-          <img src="img/serviciosSSS/room-service.webp" alt="Room Service 24/7">
-          <h3>Room Service 24/7</h3>
-          <p>Servicio a la habitación disponible en todo momento.</p>
-        </div>
-
-        <div class="service-card">
-          <img src="img/serviciosSSS/articulo-eventos-sociales-hoteles.webp" alt="Eventos y Conferencias">
-          <h3>Eventos y Conferencias</h3>
-          <p>Salones equipados para tus reuniones y celebraciones.</p>
-        </div>
-      </div>
-    </div>
-    <div id="footer"></div>
+    <div id="servicios-container"></div>
   </section>
 
   <!-- 🔹 Página Reservas -->
@@ -99,125 +57,27 @@
       <p class="reservas-subtitle">Encuentra tu habitación perfecta y reserva en segundos</p>
 
       <!-- Formulario de búsqueda -->
-      <div class="search-card">
-        <h2>Buscar Disponibilidad</h2>
-        <div class="search-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fecha-entrada">Fecha de entrada</label>
-              <input type="date" id="fecha-entrada" required>
-            </div>
-            <div class="form-group">
-              <label for="fecha-salida">Fecha de salida</label>
-              <input type="date" id="fecha-salida" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ubicacion">Ubicación</label>
-              <select id="ubicacion">
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="num-personas">Número de personas</label>
-              <select id="num-personas" required>
-                <option value="">Selecciona</option>
-                <option value="1">1 persona</option>
-                <option value="2">2 personas</option>
-                <option value="3">3 personas</option>
-                <option value="4">4 personas</option>
-                <option value="5">5 personas</option>
-                <option value="6">6 personas</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <button class="btn-search">🔍 Buscar Habitaciones</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="search-card-container"></div>
 
       <!-- Resultados de búsqueda -->
       <div class="results-section">
         <h2>Habitaciones Disponibles</h2>
-        <div class="rooms-grid">
-          <!-- Los resultados se cargarán dinámicamente -->
-        </div>
+        <div class="rooms-grid"></div>
       </div>
 
       <!-- Mis Reservas -->
       <div class="my-reservations-section">
         <h2>Mis Reservas</h2>
         <p class="section-info">Aquí puedes ver y gestionar tus reservas activas</p>
-        <div class="reservations-list">
-          <!-- Las reservas se cargarán dinámicamente -->
-        </div>
+        <div class="reservations-list"></div>
       </div>
     </div>
-    <div id="footer"></div>
   </section>
 
-<!-- 🔹 Página Contacto -->
-<!-- 🔹 Página Contacto con Grid -->
-<section id="contacto">
-  <div class="parent">
-    
-    <!-- 🔸 Header -->
-    <div class="div1">
-      <header>
-        <div class="logo-box"><span>🏨</span></div>
-        <h1>Hotel el Rincón del Carmen</h1>
-        <p>Estamos aquí para atenderte</p>
-      </header>
-    </div>
+  <!-- 🔹 Página Contacto -->
+  <section id="contacto"></section>
 
-    <!-- 🔸 Dirección -->
-    <div class="div2 address-box">
-      <h3>📍 Nuestra Ubicación</h3>
-      <p>
-        Calle Principal #123, Barrio El Carmen<br>
-        Floridablanca, Santander, Colombia
-      </p>
-    </div>
-
-    <!-- 🔸 Teléfonos -->
-    <div class="div3 contact-card">
-      <div class="contact-icon">📞</div>
-      <h3>Teléfonos</h3>
-      <a href="tel:+576071234567">+57 607 123 4567</a><br>
-      <a href="tel:+573001234567">+57 300 123 4567</a>
-    </div>
-
-    <!-- 🔸 Correos -->
-    <div class="div4 contact-card">
-      <div class="contact-icon">✉️</div>
-      <h3>Correos Electrónicos</h3>
-      <a href="mailto:info@rincondelcarmen.com">info@rincondelcarmen.com</a><br>
-      <a href="mailto:reservas@rincondelcarmen.com">reservas@rincondelcarmen.com</a>
-    </div>
-
-    <!-- 🔸 WhatsApp -->
-    <div class="div5 contact-card">
-      <div class="contact-icon">💬</div>
-      <h3>WhatsApp</h3>
-      <a href="https://wa.me/573001234567" target="_blank">Enviar mensaje</a>
-    </div>
-
-    <!-- 🔸 Mapa -->
-    <div class="div6 map-section">
-      <h2>Encuéntranos en el Mapa</h2>
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.0887877891643!2d-73.08623792487853!3d7.097734216602359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e681576c2ab4aeb%3A0x7f8a5b6f9a8e5c3d!2sFloridablanca%2C%20Santander%2C%20Colombia!5e0!3m2!1ses!2sus!4v1696445678901!5m2!1ses!2sus"
-        loading="lazy"></iframe>
-    </div>
-
-  </div>
-
-  <div id="footer"></div>
-</section>
-
-
-  <!-- 🔹 Página Administración (solo para administradores) -->
+  <!-- 🔹 Página Administración -->
   <section id="admin">
     <div class="container">
       <header>
@@ -226,14 +86,14 @@
         <p>Gestiona las habitaciones del hotel</p>
       </header>
 
-      <div id="room-management-container">
-        <!-- El contenido se cargará dinámicamente -->
-      </div>
+      <div id="room-management-container"></div>
     </div>
-    <div id="footer"></div>
   </section>
 
-  <!-- Modal para detalles de habitación -->
+  <!-- 🔹 Modal para detalles de habitación -->
   <div id="room-modal" class="modal"></div>
+
+  <!-- 🔹 Footer (único para todas las páginas) -->
+  <div id="footer"></div>
 </body>
 </html>
