@@ -68,28 +68,28 @@ function renderRoomsTable() {
       <table class="admin-rooms-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Imagen</th>
+            <th class="mobile-hidden">ID</th>
+            <th class="mobile-hidden">Imagen</th>
             <th>Nombre</th>
             <th>Ubicación</th>
-            <th>Camas</th>
-            <th>Capacidad</th>
+            <th class="mobile-hidden">Camas</th>
+            <th class="mobile-hidden">Capacidad</th>
             <th>Precio/Noche</th>
-            <th>Servicios</th>
+            <th class="mobile-hidden">Servicios</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           ${rooms.map(room => `
             <tr>
-              <td><span class="id-badge">${room.id}</span></td>
-              <td><img src="${room.image}" alt="${room.name}" class="room-thumb"></td>
+              <td class="mobile-hidden"><span class="id-badge">${room.id}</span></td>
+              <td class="mobile-hidden"><img src="${room.image}" alt="${room.name}" class="room-thumb"></td>
               <td><strong>${room.name}</strong></td>
               <td>${room.location}</td>
-              <td>${room.beds}</td>
-              <td>${room.capacity}</td>
+              <td class="mobile-hidden">${room.beds}</td>
+              <td class="mobile-hidden">${room.capacity}</td>
               <td><span class="price">$${room.pricePerNight.toLocaleString()}</span></td>
-              <td><div class="services-list">${room.services.map(s => `<span class="service-chip">${s}</span>`).join('')}</div></td>
+              <td class="mobile-hidden"><div class="services-list">${room.services.map(s => `<span class="service-chip">${s}</span>`).join('')}</div></td>
               <td>
                 <div class="action-buttons">
                   <button class="btn-edit" data-room-id="${room.id}" title="Editar habitación">
