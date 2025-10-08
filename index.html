@@ -57,7 +57,43 @@
       <p class="reservas-subtitle">Encuentra tu habitación perfecta y reserva en segundos</p>
 
       <!-- Formulario de búsqueda -->
-      <div id="search-card-container"></div>
+      <div class="search-card">
+        <h2>Buscar Disponibilidad</h2>
+        <div class="search-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha-entrada">Fecha de entrada</label>
+              <input type="date" id="fecha-entrada" required>
+            </div>
+            <div class="form-group">
+              <label for="fecha-salida">Fecha de salida</label>
+              <input type="date" id="fecha-salida" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ubicacion">Ubicación</label>
+              <select id="ubicacion">
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="num-personas">Número de personas</label>
+              <select id="num-personas" required>
+                <option value="">Selecciona</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button class="btn-search">🔍 Buscar Habitaciones</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Resultados de búsqueda -->
       <div class="results-section">
