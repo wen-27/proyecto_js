@@ -1,9 +1,9 @@
 // Lógica para la página de reservas
 
 import { isUserLoggedIn } from './auth.js';
-import { showSection } from './navbar.js';
+import { showSection } from './navbar-layout.js';
 import { getRooms, getReservations, saveReservations, checkRoomAvailability } from './storage.js';
-import { showRoomModal } from '../components/modalReserva.js';
+import { showRoomModal } from './modalReserva.js';
 import { createRoomCard } from '../components/cardRoom.js';
 
 

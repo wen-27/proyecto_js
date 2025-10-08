@@ -1,8 +1,8 @@
 // Modal para detalles de habitación y reserva
 
-import { isUserLoggedIn } from '../layout/auth.js';
-import { showSection } from '../layout/navbar.js';
-import { addReservation, checkRoomAvailability, getAvailableDateRanges } from '../layout/storage.js';
+import { isUserLoggedIn } from './auth.js';
+import { showSection } from './navbar-layout.js';
+import { addReservation, checkRoomAvailability, getAvailableDateRanges } from './storage.js';
 
 let currentRoom = null;
 let currentSearchData = null;
