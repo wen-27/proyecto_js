@@ -112,6 +112,17 @@ export function addReservation(reservation) {
   saveReservations(reservations);
 }
 
+export function updateReservation(reservationId, updatedReservation) {
+  const reservations = getReservations();
+  const index = reservations.findIndex(r => r.id === reservationId);
+  if (index !== -1) {
+    reservations[index] = { ...reservations[index], ...updatedReservation };
+    saveReservations(reservations);
+    return true;
+  }
+  return false;
+}
+
 export function checkRoomAvailability(roomId, fechaEntrada, fechaSalida) {
   const reservations = getReservations();
   const entrada = new Date(fechaEntrada);
