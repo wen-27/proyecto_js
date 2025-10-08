@@ -15,8 +15,8 @@ export function contactoComponent() {
       <div class="div2 address-box">
         <h3>📍 Nuestra Ubicación</h3>
         <p>
-          Calle Principal #123, Barrio El Carmen<br>
-          Floridablanca, Santander, Colombia
+          Calle del Mar, 1420, Bahía Dorada<br>
+          Costa Atlántica, Colombia
         </p>
       </div>
 
@@ -24,7 +24,7 @@ export function contactoComponent() {
       <div class="div3 contact-card">
         <div class="contact-icon">📞</div>
         <h3>Teléfonos</h3>
-        <a href="tel:+576071234567">+57 607 123 4567</a><br>
+        <a href="tel:+573022873946">+57 302 287 3946</a> <br>
         <a href="tel:+573001234567">+57 300 123 4567</a>
       </div>
 
@@ -40,7 +40,7 @@ export function contactoComponent() {
       <div class="div5 contact-card">
         <div class="contact-icon">💬</div>
         <h3>WhatsApp</h3>
-        <a href="https://wa.me/573001234567" target="_blank">Enviar mensaje</a>
+        <a href="https://wa.me/573022873946" target="_blank">Enviar mensaje</a>
       </div>
 
       <!-- 🔸 Mapa -->
