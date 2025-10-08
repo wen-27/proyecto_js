@@ -180,6 +180,10 @@ export function logoutUser() {
 
 function onLoginSuccess(user) {
   sessionStorage.setItem('currentUser', JSON.stringify(user));
-  showSection('inicio');
+  if (user.role === 'admin') {
+    showSection('admin');
+  } else {
+    showSection('inicio');
+  }
   updateNav();
 }

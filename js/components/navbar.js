@@ -12,6 +12,7 @@ export function createNavbar() {
       <a href="#inicio">Inicio</a>
       <a href="#reservas">Reservas</a>
       <a href="#contacto">Contacto</a>
+      <a href="#admin" id="admin-link" style="display:none;">Admin</a>
       <a href="#" id="logout-link" style="cursor:pointer; display:none;">Cerrar Sesión</a>
     </div>
   `;

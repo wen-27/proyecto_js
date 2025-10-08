@@ -94,7 +94,7 @@ import { getCurrentUser } from './storage.js';
 
 function updateNav() {
   const logoutLink = document.getElementById('logout-link');
-  const adminLink = document.querySelector('a[href="#admin"]');
+  const adminLink = document.getElementById('admin-link');
   const currentUser = getCurrentUser();
 
   if (logoutLink) {
