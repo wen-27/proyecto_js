@@ -166,13 +166,11 @@ function registerUser(data) {
 
 // 🔹 Funciones de sesión
 export function isUserLoggedIn() {
-  return sessionStorage.getItem('currentUser') !== null;
+  return localStorage.getItem('currentUser') !== null;
 }
 
 export function logoutUser() {
-  sessionStorage.removeItem('currentUser');
-  // Limpiar reservas al cerrar sesión
-  localStorage.removeItem('hotel_reservations');
+  localStorage.removeItem('currentUser');
   // Limpiar UI de reservas
   const reservationsList = document.querySelector('.reservations-list');
   if (reservationsList) {

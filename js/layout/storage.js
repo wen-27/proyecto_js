@@ -411,7 +411,7 @@ export function getAvailableDateRanges(roomId) {
 
 // Usuario actual
 export function getCurrentUser() {
-  const user = sessionStorage.getItem('currentUser');
+  const user = localStorage.getItem('currentUser');
   return user ? JSON.parse(user) : null;
 }
 

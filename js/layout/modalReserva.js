@@ -80,7 +80,7 @@ export function showRoomModal(room, searchData) {
   return;
 }
 
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const reservation = {
       id: Date.now(),
       roomId: room.id,
