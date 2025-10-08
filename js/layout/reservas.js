@@ -72,10 +72,18 @@ function loadReservations() {
       </div>
       <div class="reservation-actions">
         <button class="btn-action btn-details" data-reservation-id="${reservation.id}">Ver Detalles</button>
-        <button class="btn-action btn-cancel" data-reservation-id="${reservation.id}">Cancelar Reserva</button>
+        <button class="btn-action btn-modify" data-reservation-id="${reservation.id}">Modificar Reserva</button>
       </div>
     `;
     reservationsList.appendChild(reservationCard);
+  });
+
+  // Event listeners for modify buttons
+  document.querySelectorAll('.reservation-card .btn-modify').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const reservationId = parseInt(e.target.dataset.reservationId);
+      openModifyReservationModal(reservationId);
+    });
   });
 
   // Confirmaciónes
@@ -96,7 +104,7 @@ function loadReservations() {
       }).then((result) => {
         if (result.isConfirmed) {
           cancelReservation(reservationId);
-         
+          
           card.style.transition = "all 0.5s ease";
           card.style.opacity = "0";
           card.style.transform = "translateY(-10px)";
@@ -354,12 +362,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Poblar select de ubicaciones
   const ubicacionSelect = document.getElementById('ubicacion');
   if (ubicacionSelect) {
-    const rooms = getRooms();
-    const locations = [...new Set(rooms.map(room => room.location))];
-    locations.forEach(location => {
+    // Agregar opción por defecto
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Todas las ubicaciones';
+    ubicacionSelect.appendChild(defaultOption);
+
+    // Ubicaciones por defecto en Colombia
+    const defaultLocations = ['Cartagena, Colombia', 'Bogotá, Colombia', 'Medellín, Colombia', 'Cali, Colombia', 'Barranquilla, Colombia'];
+    defaultLocations.forEach(location => {
       const option = document.createElement('option');
-      option.value = location;
-      option.textContent = location;
+      option.value = location.trim();
+      option.textContent = location.trim();
+      ubicacionSelect.appendChild(option);
+    });
+
+    // Agregar ubicaciones de habitaciones existentes si no están en las por defecto
+    const rooms = getRooms();
+    const roomLocations = [...new Set(rooms.map(room => room.location.trim()).filter(loc => loc && loc.trim() !== '' && !defaultLocations.map(l => l.trim()).includes(loc)))];
+    roomLocations.forEach(location => {
+      const option = document.createElement('option');
+      option.value = location.trim();
+      option.textContent = location.trim();
       ubicacionSelect.appendChild(option);
     });
   }
@@ -462,7 +486,7 @@ document.addEventListener('click', (e) => {
       let availableRooms = rooms.filter(room => room.capacity >= numPersonas && room.available && checkRoomAvailability(room.id, fechaEntrada, fechaSalida));
 
       if (ubicacion) {
-        availableRooms = availableRooms.filter(room => room.location.toLowerCase() === ubicacion.toLowerCase());
+        availableRooms = availableRooms.filter(room => room.location.toLowerCase().trim() === ubicacion.toLowerCase().trim());
       }
 
       const roomsGrid = document.querySelector('.rooms-grid');

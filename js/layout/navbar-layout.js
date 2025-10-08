@@ -76,6 +76,17 @@ export function initNavListeners() {
     logoutLink.addEventListener('click', (e) => {
       e.preventDefault();
       logoutUser();
+      // Limpiar la lista de reservas al cerrar sesión
+      const reservationsList = document.querySelector('.reservations-list');
+      if (reservationsList) {
+        reservationsList.innerHTML = `
+          <div class="no-reservations">
+            <div class="no-reservations-icon">📅</div>
+            <h3>No tienes reservas activas</h3>
+            <p>¡Haz tu primera reserva ahora!</p>
+          </div>
+        `;
+      }
     });
   }
 }
