@@ -379,11 +379,12 @@ export function updateReservation(reservationId, updatedReservation) {
   return false;
 }
 
-export function checkRoomAvailability(roomId, fechaEntrada, fechaSalida) {
+export function checkRoomAvailability(roomId, fechaEntrada, fechaSalida, excludeReservationId = null) {
   const reservations = getReservations();
   const entrada = new Date(fechaEntrada);
   const salida = new Date(fechaSalida);
   return !reservations.some(r => {
+    if (r.id === excludeReservationId) return false;
     if (r.roomId !== roomId) return false;
     const resStart = new Date(r.fechaEntrada);
     const resEnd = new Date(r.fechaSalida);

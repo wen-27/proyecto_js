@@ -328,7 +328,7 @@ function openModifyReservationModal(reservationId) {
     if (result.isConfirmed) {
       const { fechaEntrada, fechaSalida, numPersonas } = result.value;
  
-      if (!checkRoomAvailability(reservation.roomId, fechaEntrada, fechaSalida)) {
+      if (!checkRoomAvailability(reservation.roomId, fechaEntrada, fechaSalida, reservation.id)) {
         Swal.fire({
           title: 'No disponible',
           text: 'La habitación no está disponible en las fechas seleccionadas.',
