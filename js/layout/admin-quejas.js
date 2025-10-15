@@ -114,20 +114,20 @@ function showResponseModal(complaintId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Cargar quejas al mostrar la sección de admin
-  const adminSection = document.getElementById('admin');
-  if (adminSection) {
+  // Cargar quejas al mostrar la sección de admin-quejas
+  const adminQuejasSection = document.getElementById('admin-quejas');
+  if (adminQuejasSection) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-          const display = window.getComputedStyle(adminSection).display;
+          const display = window.getComputedStyle(adminQuejasSection).display;
           if (display === 'block') {
             loadAdminComplaints();
           }
         }
       });
     });
-    observer.observe(adminSection, { attributes: true, attributeFilter: ['style'] });
+    observer.observe(adminQuejasSection, { attributes: true, attributeFilter: ['style'] });
   }
 
   // Event listener para filtro de estado

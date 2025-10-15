@@ -14,6 +14,7 @@ export function createNavbar() {
       <a href="#contacto">Contacto</a>
       <a href="#quejas" id="quejas-link">Quejas</a>
       <a href="#admin" id="admin-link" style="display:none;">Admin</a>
+      <a href="#admin-quejas" id="admin-quejas-link" style="display:none;">Admin Quejas</a>
       <a href="#" id="logout-link" style="cursor:pointer; display:none;">Cerrar Sesión</a>
     </div>
   `;

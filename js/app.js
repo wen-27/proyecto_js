@@ -46,6 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const quejasDiv = document.getElementById('quejas');
   if (quejasDiv) quejasDiv.innerHTML = quejasComponent();
 
+  // 🔹 Admin Quejas
+  const adminQuejasDiv = document.getElementById('admin-quejas');
+  if (adminQuejasDiv) adminQuejasDiv.innerHTML = adminQuejasComponent();
+
   // 🔹 Footer (siempre insertamos)
   const footerDiv = document.getElementById('footer');
   if (footerDiv) footerDiv.appendChild(createFooter());
@@ -75,13 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const display = window.getComputedStyle(adminSection).display;
           if (display === 'block') {
             initRoomManagement();
-            // Agregar sección de quejas al admin
-            const adminContainer = adminSection.querySelector('.container');
-            if (adminContainer && !adminContainer.querySelector('.admin-quejas-container')) {
-              const quejasSection = document.createElement('div');
-              quejasSection.innerHTML = adminQuejasComponent();
-              adminContainer.appendChild(quejasSection);
-            }
           }
         }
       });
