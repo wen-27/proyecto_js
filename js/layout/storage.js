@@ -4,7 +4,8 @@ const STORAGE_KEYS = {
   USERS: 'hotel_users',
   ROOMS: 'hotel_rooms',
   RESERVATIONS: 'hotel_reservations',
-  NOTIFICATIONS: 'hotel_notifications'
+  NOTIFICATIONS: 'hotel_notifications',
+  COMPLAINTS: 'hotel_complaints'
 };
 
 // 🔹 Inicializar admin por defecto si no existe
@@ -446,4 +447,37 @@ export function clearUserNotifications(userEmail) {
     delete notifications[userEmail];
     saveNotifications(notifications);
   }
+}
+
+// Quejas y Reclamos
+export function getComplaints() {
+  const complaints = localStorage.getItem(STORAGE_KEYS.COMPLAINTS);
+  return complaints ? JSON.parse(complaints) : [];
+}
+
+export function saveComplaints(complaints) {
+  localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(complaints));
+}
+
+export function addComplaint(complaint) {
+  const complaints = getComplaints();
+  complaints.push(complaint);
+  saveComplaints(complaints);
+}
+
+export function updateComplaint(complaintId, updatedComplaint) {
+  const complaints = getComplaints();
+  const index = complaints.findIndex(c => c.id === complaintId);
+  if (index !== -1) {
+    complaints[index] = { ...complaints[index], ...updatedComplaint };
+    saveComplaints(complaints);
+    return true;
+  }
+  return false;
+}
+
+export function deleteComplaint(complaintId) {
+  const complaints = getComplaints();
+  const filteredComplaints = complaints.filter(c => c.id !== complaintId);
+  saveComplaints(filteredComplaints);
 }

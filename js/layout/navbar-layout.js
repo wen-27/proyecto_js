@@ -2,7 +2,7 @@
 
 import { isUserLoggedIn, logoutUser } from './auth.js';
 
-const sections = ['login', 'inicio', 'reservas', 'contacto', 'admin'];
+const sections = ['login', 'inicio', 'reservas', 'contacto', 'admin', 'quejas'];
 
 function showSection(sectionId) {
   // Verificar permisos para secciones protegidas
@@ -13,6 +13,13 @@ function showSection(sectionId) {
     }
     const currentUser = getCurrentUser();
     if (!currentUser || currentUser.role !== 'admin') {
+      showSection('login');
+      return;
+    }
+  }
+
+  if (sectionId === 'quejas') {
+    if (!isUserLoggedIn()) {
       showSection('login');
       return;
     }
@@ -106,6 +113,7 @@ import { getCurrentUser } from './storage.js';
 function updateNav() {
   const logoutLink = document.getElementById('logout-link');
   const adminLink = document.getElementById('admin-link');
+  const quejasLink = document.getElementById('quejas-link');
   const currentUser = getCurrentUser();
 
   if (logoutLink) {
@@ -121,6 +129,16 @@ function updateNav() {
       adminLink.style.display = 'inline';
     } else {
       adminLink.style.display = 'none';
+    }
+  }
+
+  if (quejasLink) {
+    if (currentUser && currentUser.role === 'admin') {
+      quejasLink.style.display = 'none';
+    } else if (isUserLoggedIn()) {
+      quejasLink.style.display = 'inline';
+    } else {
+      quejasLink.style.display = 'none';
     }
   }
 }

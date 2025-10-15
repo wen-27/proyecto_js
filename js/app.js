@@ -8,6 +8,9 @@ import { createLoginSection } from './components/login.js';
 import { habitacionesComponent } from './components/habitaciones.js';
 import { serviciosComponent } from './components/servicios.js';
 import { contactoComponent } from './components/contacto.js';
+import { quejasComponent, adminQuejasComponent } from './components/quejas.js';
+import './layout/user-quejas.js';
+import './layout/admin-quejas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('app.js cargado correctamente');
@@ -39,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactoDiv = document.getElementById('contacto');
   if (contactoDiv) contactoDiv.innerHTML = contactoComponent();
 
+  // 🔹 Quejas
+  const quejasDiv = document.getElementById('quejas');
+  if (quejasDiv) quejasDiv.innerHTML = quejasComponent();
+
   // 🔹 Footer (siempre insertamos)
   const footerDiv = document.getElementById('footer');
   if (footerDiv) footerDiv.appendChild(createFooter());
@@ -66,7 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
           const display = window.getComputedStyle(adminSection).display;
-          if (display === 'block') initRoomManagement();
+          if (display === 'block') {
+            initRoomManagement();
+            // Agregar sección de quejas al admin
+            const adminContainer = adminSection.querySelector('.container');
+            if (adminContainer && !adminContainer.querySelector('.admin-quejas-container')) {
+              const quejasSection = document.createElement('div');
+              quejasSection.innerHTML = adminQuejasComponent();
+              adminContainer.appendChild(quejasSection);
+            }
+          }
         }
       });
     });
